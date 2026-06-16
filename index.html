@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrackSolid Device Monitor</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 16px;
+    color: #1a1a1a;
+  }
+  .header {
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-size: 20px;
+    margin: 0 0 4px 0;
+  }
+  .header .updated {
+    font-size: 13px;
+    color: #666;
+  }
+  .summary {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .stat-card {
+    flex: 1;
+    min-width: 100px;
+    background: white;
+    border-radius: 10px;
+    padding: 12px 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .stat-card .num { font-size: 24px; font-weight: 700; }
+  .stat-card .label { font-size: 12px; color: #666; margin-top: 2px; }
+  .stat-card.online .num { color: #16a34a; }
+  .stat-card.offline .num { color: #dc2626; }
+  .stat-card.total .num { color: #1a1a1a; }
+
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .filter-btn {
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    background: white;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .filter-btn.active {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
+  }
+  .search-box {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+
+  .device-list {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .device-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    gap: 10px;
+  }
+  .device-row:last-child { border-bottom: none; }
+  .status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .status-dot.online { background: #16a34a; }
+  .status-dot.offline { background: #dc2626; }
+  .device-info { flex: 1; min-width: 0; }
+  .device-name { font-weight: 600; font-size: 14px; }
+  .device-meta { font-size: 12px; color: #888; margin-top: 2px; }
+  .device-hours {
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .device-hours.offline { color: #dc2626; }
+  .device-hours.online { color: #16a34a; }
+
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+  }
+  .loading { text-align: center; padding: 40px; color: #888; }
+  .error-box {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🛰️ TrackSolid Device Monitor</h1>
+  <div class="updated" id="lastUpdated">Memuat data...</div>
+</div>
+
+<div class="summary">
+  <div class="stat-card total">
+    <div class="num" id="totalCount">-</div>
+    <div class="label">Total Device</div>
+  </div>
+  <div class="stat-card online">
+    <div class="num" id="onlineCount">-</div>
+    <div class="label">Online</div>
+  </div>
+  <div class="stat-card offline">
+    <div class="num" id="offlineCount">-</div>
+    <div class="label">Offline</div>
+  </div>
+</div>
+
+<input type="text" class="search-box" id="searchBox" placeholder="Cari nama device atau IMEI...">
+
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">Semua</button>
+  <button class="filter-btn" data-filter="offline">Offline</button>
+  <button class="filter-btn" data-filter="online">Online</button>
+</div>
+
+<div id="errorBox"></div>
+<div class="device-list" id="deviceList">
+  <div class="loading">Memuat data...</div>
+</div>
+
+<script>
+let allDevices = [];
+let currentFilter = 'all';
+
+async function loadData() {
+  try {
+    const res = await fetch('devices.json?t=' + Date.now());
+    if (!res.ok) throw new Error('devices.json tidak ditemukan');
+    const data = await res.json();
+
+    document.getElementById('lastUpdated').textContent = 'Terakhir dicek: ' + data.lastChecked;
+    document.getElementById('totalCount').textContent = data.totalDevices;
+    document.getElementById('onlineCount').textContent = data.totalOnline;
+    document.getElementById('offlineCount').textContent = data.totalOffline;
+
+    allDevices = data.devices || [];
+    renderList();
+  } catch (err) {
+    document.getElementById('errorBox').innerHTML =
+      '<div class="error-box">Gagal memuat devices.json: ' + err.message + '. Pastikan file sudah ada di folder yang sama.</div>';
+    document.getElementById('deviceList').innerHTML = '';
+  }
+}
+
+function renderList() {
+  const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+  let filtered = allDevices;
+
+  if (currentFilter === 'offline') filtered = filtered.filter(d => d.isOffline);
+  if (currentFilter === 'online') filtered = filtered.filter(d => !d.isOffline);
+
+  if (searchTerm) {
+    filtered = filtered.filter(d =>
+      (d.deviceName || '').toLowerCase().includes(searchTerm) ||
+      (d.imei || '').toLowerCase().includes(searchTerm)
+    );
+  }
+
+  const listEl = document.getElementById('deviceList');
+  if (filtered.length === 0) {
+    listEl.innerHTML = '<div class="empty-state">Tidak ada device yang cocok.</div>';
+    return;
+  }
+
+  listEl.innerHTML = filtered.map(d => {
+    const statusClass = d.isOffline ? 'offline' : 'online';
+    const hoursText = d.hoursSinceUpdate !== null
+      ? d.hoursSinceUpdate + ' jam lalu'
+      : 'Tidak ada data';
+    return `
+      <div class="device-row">
+        <div class="status-dot ${statusClass}"></div>
+        <div class="device-info">
+          <div class="device-name">${escapeHtml(d.deviceName)}</div>
+          <div class="device-meta">${escapeHtml(d.imei)} · ${escapeHtml(d.groupName || '')}</div>
+        </div>
+        <div class="device-hours ${statusClass}">${hoursText}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str || '';
+  return div.innerHTML;
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    renderList();
+  });
+});
+
+document.getElementById('searchBox').addEventListener('input', renderList);
+
+loadData();
+</script>
+
+</body>
+</html>
