@@ -67,15 +67,35 @@ def login_and_get_session(playwright) -> tuple:
         page.screenshot(path="debug_login_page.png")
         raise SystemExit("Tidak ketemu input username. Screenshot disimpan ke debug_login_page.png")
 
-    # Klik tombol login (selector dikonfirmasi dari inspect element: class "login-button")
-    try:
-        page.click("button.login-button", timeout=15000)
-    except Exception:
+    # Klik tombol login. Dari screenshot debug, tombolnya bertuliskan "Sign in".
+    # Coba beberapa selector sebagai fallback.
+    clicked = False
+    selectors_to_try = [
+        "button:has-text('Sign in')",
+        "button.login-button",
+        "text=Sign in",
+    ]
+    last_error = None
+    for selector in selectors_to_try:
+        try:
+            page.click(selector, timeout=10000)
+            clicked = True
+            break
+        except Exception as e:
+            last_error = e
+            continue
+
+    if not clicked:
         page.screenshot(path="debug_before_click.png")
-        raise
+        raise SystemExit(f"Tidak bisa klik tombol login dengan selector manapun. Error terakhir: {last_error}")
 
     # Tunggu sampai redirect ke halaman monitor (artinya login sukses)
-    page.wait_for_url("**/monitorObject**", timeout=30000)
+    try:
+        page.wait_for_url("**/monitorObject**", timeout=30000)
+    except Exception:
+        page.screenshot(path="debug_after_click.png")
+        print(f"URL saat ini: {page.url}")
+        raise
     page.wait_for_timeout(2000)  # beri waktu localStorage ke-set
 
     # Ambil token dari localStorage
