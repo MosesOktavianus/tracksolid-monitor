@@ -22,14 +22,17 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests
+        run: pip install requests playwright
+
+      - name: Install Playwright browser
+        run: playwright install --with-deps chromium
 
       - name: Run device check
         env:
           TSP_ACCOUNT: ${{ secrets.TSP_ACCOUNT }}
           TSP_PASSWORD: ${{ secrets.TSP_PASSWORD }}
-          EMAIL_USER: ${{ secrets.EMAIL_USER }}
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
         run: python check_devices.py
 
