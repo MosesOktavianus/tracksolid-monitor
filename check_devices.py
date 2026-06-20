@@ -47,8 +47,14 @@ def login(session: requests.Session) -> None:
     headers = {
         "Content-Type": "application/json;charset=UTF-8",
         "Accept": "application/json, text/plain, */*",
+        "Origin": "https://www.tracksolidpro.com",
+        "Referer": "https://www.tracksolidpro.com/",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
     }
     resp = session.post(LOGIN_URL, json=payload, headers=headers, timeout=30)
+    if resp.status_code != 200:
+        print(f"Login response status: {resp.status_code}")
+        print(f"Login response body: {resp.text[:500]}")
     resp.raise_for_status()
     data = resp.json()
     if not data.get("ok", False) and not data.get("success", False):
