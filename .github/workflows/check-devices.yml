@@ -36,6 +36,14 @@ jobs:
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
         run: python check_devices.py
 
+      - name: Upload debug screenshot if failed
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-screenshots
+          path: debug_*.png
+          if-no-files-found: ignore
+
       - name: Commit and push results
         run: |
           git config user.name "github-actions[bot]"
