@@ -1,21 +1,28 @@
 """
-TrackSolidPro Device Monitor
-Login ke TrackSolidPro, ambil semua device, deteksi yang offline > OFFLINE_THRESHOLD_HOURS jam.
+TrackSolidPro Device Monitor (Playwright version)
+Login ke TrackSolidPro pakai browser asli (headless), ambil semua device,
+deteksi yang offline > OFFLINE_THRESHOLD_HOURS jam.
 Hasil disimpan ke devices.json (untuk web list) dan dikirim email kalau ada perubahan status.
 
+Kenapa Playwright (bukan requests biasa)?
+TrackSolidPro generate token JWT lewat JavaScript di browser (disimpan di localStorage)
+sebelum request login dikirim. Token ini tidak bisa direplikasi gampang lewat HTTP request
+biasa, jadi kita pakai browser asli (headless) supaya token itu otomatis ter-generate
+sama seperti saat login manual.
+
 Cara pakai:
-- Set environment variables: TSP_ACCOUNT, TSP_PASSWORD, dan (kalau pakai email) EMAIL_* vars
+- Set environment variables: TSP_ACCOUNT, TSP_PASSWORD, RESEND_API_KEY, EMAIL_FROM, EMAIL_TO
+- playwright install chromium  (sekali saja, sudah otomatis di workflow)
 - python check_devices.py
 """
 
 import os
 import json
-import hashlib
 import requests
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta
+from playwright.sync_api import sync_playwright
 
 BASE_URL = "https://www.tracksolidpro.com"
-LOGIN_URL = f"{BASE_URL}/v3/new/newHomepage/login"
 DEVICE_LIST_URL = f"{BASE_URL}/v3/new/newEquipment/queryEquipmentList"
 
 OFFLINE_THRESHOLD_HOURS = 12
@@ -23,7 +30,6 @@ OFFLINE_THRESHOLD_HOURS = 12
 DATA_FILE = "devices.json"
 PREVIOUS_FILE = "devices_previous.json"
 
-# ---------- Konfigurasi dari environment variables ----------
 ACCOUNT = os.environ.get("TSP_ACCOUNT")
 PASSWORD = os.environ.get("TSP_PASSWORD")
 
@@ -31,39 +37,70 @@ if not ACCOUNT or not PASSWORD:
     raise SystemExit("ERROR: set environment variable TSP_ACCOUNT dan TSP_PASSWORD dulu.")
 
 
-def md5_hash(text: str) -> str:
-    return hashlib.md5(text.encode("utf-8")).hexdigest()
+def login_and_get_session(playwright) -> tuple:
+    """
+    Buka browser headless, login manual lewat form, lalu ambil:
+    - cookies (untuk dipakai di request requests.Session berikutnya)
+    - token dari localStorage (untuk header Authorization)
+    """
+    browser = playwright.chromium.launch(headless=True)
+    page = browser.new_page()
+
+    print("Membuka halaman login...")
+    page.goto(f"{BASE_URL}/resource/dev/index.html#/login", wait_until="networkidle", timeout=60000)
+
+    # Tunggu form login muncul. Selector ini best-effort -- kalau berubah,
+    # perlu disesuaikan dengan inspect elemen form login asli.
+    page.wait_for_selector("input[type='text'], input[type='email']", timeout=30000)
+
+    # Isi form login. Asumsi: input pertama = username, input password = password.
+    inputs = page.query_selector_all("input")
+    username_filled = False
+    for inp in inputs:
+        input_type = inp.get_attribute("type")
+        if input_type == "password":
+            inp.fill(PASSWORD)
+        elif not username_filled and input_type in ("text", "email", None):
+            inp.fill(ACCOUNT)
+            username_filled = True
+
+    # Klik tombol login (cari tombol dengan teks "Login" / "Sign in" / "登录")
+    page.click("button:has-text('Login'), button:has-text('Sign in'), button[type='submit']")
+
+    # Tunggu sampai redirect ke halaman monitor (artinya login sukses)
+    page.wait_for_url("**/monitorObject**", timeout=30000)
+    page.wait_for_timeout(2000)  # beri waktu localStorage ke-set
+
+    # Ambil token dari localStorage
+    token = page.evaluate("() => localStorage.getItem('token')")
+    cookies = page.context.cookies()
+
+    browser.close()
+
+    if not token:
+        raise SystemExit("Gagal mengambil token dari localStorage setelah login.")
+
+    print("Login berhasil, token & cookies didapat.")
+    return token, cookies
 
 
-def login(session: requests.Session) -> None:
-    """Login dan biarkan session menyimpan cookie JSESSIONID otomatis."""
-    payload = {
-        "account": ACCOUNT,
-        "language": "en",
-        "nodeId": "",
-        "password": md5_hash(PASSWORD),
-        "validCode": "",
-    }
-    headers = {
+def build_requests_session(token: str, cookies: list) -> requests.Session:
+    session = requests.Session()
+    for c in cookies:
+        session.cookies.set(c["name"], c["value"], domain=c.get("domain"))
+    session.headers.update({
+        "Authorization": token,
         "Content-Type": "application/json;charset=UTF-8",
         "Accept": "application/json, text/plain, */*",
-        "Origin": "https://www.tracksolidpro.com",
-        "Referer": "https://www.tracksolidpro.com/",
+        "Origin": BASE_URL,
+        "Referer": f"{BASE_URL}/",
+        "Must": "true",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-    }
-    resp = session.post(LOGIN_URL, json=payload, headers=headers, timeout=30)
-    if resp.status_code != 200:
-        print(f"Login response status: {resp.status_code}")
-        print(f"Login response body: {resp.text[:500]}")
-    resp.raise_for_status()
-    data = resp.json()
-    if not data.get("ok", False) and not data.get("success", False):
-        raise SystemExit(f"Login gagal. Response: {data}")
-    print("Login berhasil.")
+    })
+    return session
 
 
 def fetch_all_devices(session: requests.Session) -> list:
-    """Ambil semua device. pageSize besar supaya 1x request cukup untuk ~362 device."""
     payload = {
         "imei": "",
         "startRow": "0",
@@ -71,19 +108,18 @@ def fetch_all_devices(session: requests.Session) -> list:
         "userId": "",
         "isNewMcType": "0",
         "orgId": "",
-        "pageSize": 1000,  # lebih dari jumlah device supaya 1x ambil semua
-        "searchStatus": "",  # kosong = semua status (online + offline)
+        "pageSize": 1000,
+        "searchStatus": "",
         "siftType": "",
         "sortRule": "",
         "sortType": "",
         "type": "NORMAL",
         "videoEntry": "",
     }
-    headers = {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Accept": "application/json, text/plain, */*",
-    }
-    resp = session.post(DEVICE_LIST_URL, json=payload, headers=headers, timeout=30)
+    resp = session.post(DEVICE_LIST_URL, json=payload, timeout=30)
+    if resp.status_code != 200:
+        print(f"Device list response status: {resp.status_code}")
+        print(f"Device list response body: {resp.text[:500]}")
     resp.raise_for_status()
     data = resp.json()
     if not data.get("ok", False):
@@ -92,7 +128,6 @@ def fetch_all_devices(session: requests.Session) -> list:
 
 
 def parse_gps_time(gps_time_str: str):
-    """gpsTime formatnya '2026-06-16 17:15:21' (asumsi WIB/lokal server)."""
     if not gps_time_str:
         return None
     try:
@@ -131,7 +166,6 @@ def process_devices(raw_devices: list) -> list:
             "isOffline": is_offline,
         })
 
-    # urutkan: offline duluan, lalu yang paling lama tidak update
     processed.sort(key=lambda x: (not x["isOffline"], -(x["hoursSinceUpdate"] or 0)))
     return processed
 
@@ -144,7 +178,6 @@ def load_previous() -> dict:
 
 
 def detect_new_offline(processed: list, previous_status: dict) -> list:
-    """Device yang BARU jadi offline (sebelumnya online, sekarang offline)."""
     newly_offline = []
     for d in processed:
         prev_offline = previous_status.get(d["imei"])
@@ -162,7 +195,6 @@ def save_results(processed: list):
         "totalOnline": sum(1 for d in processed if not d["isOffline"]),
         "devices": processed,
     }
-    # simpan snapshot lama sebagai "previous" sebelum overwrite
     if os.path.exists(DATA_FILE):
         with open(DATA_FILE, "r") as f:
             old = f.read()
@@ -229,8 +261,10 @@ def send_email_alert(newly_offline: list):
 
 
 def main():
-    session = requests.Session()
-    login(session)
+    with sync_playwright() as playwright:
+        token, cookies = login_and_get_session(playwright)
+
+    session = build_requests_session(token, cookies)
     raw_devices = fetch_all_devices(session)
     print(f"Total device diterima dari server: {len(raw_devices)}")
 
