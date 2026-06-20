@@ -49,9 +49,8 @@ def login_and_get_session(playwright) -> tuple:
     print("Membuka halaman login...")
     page.goto(f"{BASE_URL}/resource/dev/index.html#/login", wait_until="networkidle", timeout=60000)
 
-    # Tunggu form login muncul. Selector ini best-effort -- kalau berubah,
-    # perlu disesuaikan dengan inspect elemen form login asli.
-    page.wait_for_selector("input[type='text'], input[type='email']", timeout=30000)
+    # Tunggu form login muncul.
+    page.wait_for_selector("input", timeout=30000)
 
     # Isi form login. Asumsi: input pertama = username, input password = password.
     inputs = page.query_selector_all("input")
@@ -64,8 +63,16 @@ def login_and_get_session(playwright) -> tuple:
             inp.fill(ACCOUNT)
             username_filled = True
 
-    # Klik tombol login (cari tombol dengan teks "Login" / "Sign in" / "登录")
-    page.click("button:has-text('Login'), button:has-text('Sign in'), button[type='submit']")
+    if not username_filled:
+        page.screenshot(path="debug_login_page.png")
+        raise SystemExit("Tidak ketemu input username. Screenshot disimpan ke debug_login_page.png")
+
+    # Klik tombol login (selector dikonfirmasi dari inspect element: class "login-button")
+    try:
+        page.click("button.login-button", timeout=15000)
+    except Exception:
+        page.screenshot(path="debug_before_click.png")
+        raise
 
     # Tunggu sampai redirect ke halaman monitor (artinya login sukses)
     page.wait_for_url("**/monitorObject**", timeout=30000)
