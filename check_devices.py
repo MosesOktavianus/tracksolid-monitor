@@ -155,7 +155,13 @@ def login_and_fetch_devices(playwright, account: str, password: str, label: str)
     # cuma mencakup sub-grup pertama (108 device), bukan semua (363 device).
     try:
         account_list_item = page.locator("text=/Stock\\d+\\/Total\\d+/").first
-        account_list_item.click(timeout=10000)
+        account_list_item.scroll_into_view_if_needed(timeout=5000)
+        try:
+            account_list_item.click(timeout=8000)
+        except Exception:
+            # Fallback: paksa klik meski Playwright menganggap elemen "tidak terlihat"
+            # (bisa terjadi karena overlay/animasi/struktur DOM yang sedikit beda antar akun).
+            account_list_item.click(timeout=5000, force=True)
         page.wait_for_timeout(3000)
         print(f"[{label}] Berhasil klik node induk organisasi di Account List.")
     except Exception as e:
@@ -178,56 +184,89 @@ def login_and_fetch_devices(playwright, account: str, password: str, label: str)
 
     # Coba ambil orgId dari localStorage juga -- field ini wajib diisi
     # (bukan string kosong) supaya server tidak menolak dengan IllegalParameter.
+    # Coba beberapa kemungkinan lokasi: userInfo.orgId, atau key terpisah.
     org_id = page.evaluate("""() => {
         try {
             const userInfo = localStorage.getItem('userInfo');
             if (userInfo) {
                 const parsed = JSON.parse(userInfo);
-                return parsed.orgId || null;
+                if (parsed.orgId) return parsed.orgId;
+            }
+        } catch (e) {}
+        // Coba cari di semua key localStorage yang namanya mengandung 'org'
+        try {
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.toLowerCase().includes('org')) {
+                    const val = localStorage.getItem(key);
+                    if (val && val.length > 10 && val.length < 50) return val;
+                }
             }
         } catch (e) {}
         return null;
     }""")
     print(f"[{label}] orgId terdeteksi dari localStorage: {org_id}")
 
-    # Panggil endpoint device list LANGSUNG dari dalam browser (pakai fetch),
-    # supaya semua header/auth/cookie otomatis persis seperti request asli.
-    # Payload ini disusun persis sama dengan request asli yang terbukti sukses
-    # (diambil dari DevTools Network tab saat login manual).
-    payload = {
-        "imei": "",
-        "startRow": "0",
-        "userType": 8,
-        "userId": int(user_id) if user_id else "",
-        "orgId": org_id or "",
-        "siftType": "",
-        "sortType": "",
-        "sortRule": "",
-        "isNewMcType": "0",
-        "videoEntry": "",
-        "type": "NORMAL",
-        "searchStatus": "ALL",
-    }
+    def call_device_list_api(use_org_id):
+        payload = {
+            "imei": "",
+            "startRow": "0",
+            "userType": 8,
+            "userId": int(user_id) if user_id else "",
+            "orgId": use_org_id or "",
+            "siftType": "",
+            "sortType": "",
+            "sortRule": "",
+            "isNewMcType": "0",
+            "videoEntry": "",
+            "type": "NORMAL",
+            "searchStatus": "ALL",
+        }
+        return page.evaluate(
+            """async (payload) => {
+                const token = localStorage.getItem('token');
+                const resp = await fetch('/v3/new/newEquipment/queryEquipmentList', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=UTF-8',
+                        'Accept': 'application/json, text/plain, */*',
+                        'Authorization': token,
+                        'Must': 'true',
+                    },
+                    body: JSON.stringify(payload),
+                });
+                const status = resp.status;
+                const text = await resp.text();
+                return { status, text };
+            }""",
+            payload,
+        )
 
-    result = page.evaluate(
-        """async (payload) => {
-            const token = localStorage.getItem('token');
-            const resp = await fetch('/v3/new/newEquipment/queryEquipmentList', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8',
-                    'Accept': 'application/json, text/plain, */*',
-                    'Authorization': token,
-                    'Must': 'true',
-                },
-                body: JSON.stringify(payload),
-            });
-            const status = resp.status;
-            const text = await resp.text();
-            return { status, text };
-        }""",
-        payload,
-    )
+    result = call_device_list_api(org_id)
+
+    # Kalau gagal IllegalParameter dan kita belum coba orgId dari localStorage,
+    # atau orgId kosong, coba sekali lagi dengan menunggu lebih lama (kadang
+    # localStorage org butuh waktu lebih untuk ke-set setelah klik UI).
+    if result["status"] == 200:
+        try:
+            check_data = json.loads(result["text"])
+            if check_data.get("code") == 10004:  # IllegalParameter
+                print(f"[{label}] Percobaan pertama IllegalParameter, coba ulang setelah delay tambahan...")
+                page.wait_for_timeout(4000)
+                org_id_retry = page.evaluate("""() => {
+                    try {
+                        const userInfo = localStorage.getItem('userInfo');
+                        if (userInfo) {
+                            const parsed = JSON.parse(userInfo);
+                            if (parsed.orgId) return parsed.orgId;
+                        }
+                    } catch (e) {}
+                    return null;
+                }""")
+                print(f"[{label}] orgId percobaan ke-2: {org_id_retry}")
+                result = call_device_list_api(org_id_retry or org_id)
+        except (json.JSONDecodeError, KeyError):
+            pass
 
     browser.close()
 
