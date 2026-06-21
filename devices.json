@@ -1,987 +1,969 @@
 {
-  "lastChecked": "2026-06-21 02:52:17",
-  "totalDevices": 109,
-  "totalOffline": 8,
-  "totalOnline": 101,
+  "lastChecked": "2026-06-21 07:28:12",
+  "totalDevices": 107,
+  "totalOffline": 7,
+  "totalOnline": 100,
   "devices": [
-    {
-      "deviceName": "DT040-0011",
-      "imei": "862798051924740",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2025-12-14 21:05:01",
-      "hoursSinceUpdate": 4517.8,
-      "isOffline": true
-    },
-    {
-      "deviceName": "BD",
-      "imei": "864993060312031",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-05-19 04:07:34",
-      "hoursSinceUpdate": 790.7,
-      "isOffline": true
-    },
     {
       "deviceName": "DT040-0003",
       "imei": "862798051888671",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "STATIC",
       "lastUpdate": "2026-06-16 15:49:12",
-      "hoursSinceUpdate": 107.1,
+      "hoursSinceUpdate": 111.7,
       "isOffline": true
     },
     {
       "deviceName": "DT030-0135",
       "imei": "862798051932479",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-17 06:45:13",
-      "hoursSinceUpdate": 92.1,
+      "hoursSinceUpdate": 96.7,
       "isOffline": true
     },
     {
       "deviceName": "DT030-0255",
       "imei": "864993060307791",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-17 09:57:25",
-      "hoursSinceUpdate": 88.9,
+      "hoursSinceUpdate": 93.5,
       "isOffline": true
     },
     {
       "deviceName": "DT030-0140",
       "imei": "862798051934061",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-19 09:50:53",
-      "hoursSinceUpdate": 41.0,
+      "hoursSinceUpdate": 45.6,
       "isOffline": true
     },
     {
       "deviceName": "DT030-0082",
       "imei": "862798051934491",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "STATIC",
       "lastUpdate": "2026-06-19 15:27:16",
-      "hoursSinceUpdate": 35.4,
+      "hoursSinceUpdate": 40.0,
       "isOffline": true
-    },
-    {
-      "deviceName": "DT030-0129",
-      "imei": "862798051924245",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-20 14:43:41",
-      "hoursSinceUpdate": 12.1,
-      "isOffline": true
-    },
-    {
-      "deviceName": "DT030-0111",
-      "imei": "862798051745988",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-20 15:47:58",
-      "hoursSinceUpdate": 11.1,
-      "isOffline": false
     },
     {
       "deviceName": "DT030-0078",
       "imei": "862798051930150",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "STATIC",
       "lastUpdate": "2026-06-20 16:55:00",
-      "hoursSinceUpdate": 10.0,
-      "isOffline": false
+      "hoursSinceUpdate": 14.6,
+      "isOffline": true
     },
     {
       "deviceName": "DT030-0128",
       "imei": "862798051932404",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-20 17:21:35",
-      "hoursSinceUpdate": 9.5,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0116",
-      "imei": "862798051921233",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-20 20:07:01",
-      "hoursSinceUpdate": 6.8,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT040-0027",
-      "imei": "862798051921522",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-20 20:58:52",
-      "hoursSinceUpdate": 5.9,
-      "isOffline": false
+      "hoursSinceUpdate": 14.1,
+      "isOffline": true
     },
     {
       "deviceName": "DT030-0136",
       "imei": "862798051921803",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-21 01:43:18",
-      "hoursSinceUpdate": 1.1,
+      "hoursSinceUpdate": 5.7,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0249",
       "imei": "862798051746432",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-21 01:51:50",
-      "hoursSinceUpdate": 1.0,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0207",
-      "imei": "862798051921357",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 01:57:16",
-      "hoursSinceUpdate": 0.9,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0146",
-      "imei": "862798051925804",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 02:40:15",
-      "hoursSinceUpdate": 0.2,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0080",
-      "imei": "865478070068384",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 04:49:24",
-      "hoursSinceUpdate": -2.0,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0160",
-      "imei": "862798051920649",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 04:55:23",
-      "hoursSinceUpdate": -2.1,
+      "hoursSinceUpdate": 5.6,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0144",
       "imei": "862798051932263",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "STATIC",
       "lastUpdate": "2026-06-21 06:31:08",
-      "hoursSinceUpdate": -3.6,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0107",
-      "imei": "862798051932123",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 06:43:02",
-      "hoursSinceUpdate": -3.8,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0183",
-      "imei": "862798051927537",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 07:21:37",
-      "hoursSinceUpdate": -4.5,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT040-0005",
-      "imei": "862798051935258",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 07:21:32",
-      "hoursSinceUpdate": -4.5,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT040-0023",
-      "imei": "862798051934038",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 07:24:33",
-      "hoursSinceUpdate": -4.5,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0212",
-      "imei": "864993060309722",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 07:39:25",
-      "hoursSinceUpdate": -4.8,
+      "hoursSinceUpdate": 1.0,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0118",
       "imei": "862798051920128",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-21 07:41:37",
-      "hoursSinceUpdate": -4.8,
+      "hoursSinceUpdate": -0.2,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0141",
       "imei": "862798051925358",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "STATIC",
       "lastUpdate": "2026-06-21 07:41:29",
-      "hoursSinceUpdate": -4.8,
+      "hoursSinceUpdate": -0.2,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0163",
-      "imei": "862798051927412",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT040-0027",
+      "imei": "862798051921522",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 07:46:44",
-      "hoursSinceUpdate": -4.9,
+      "lastUpdate": "2026-06-21 10:26:33",
+      "hoursSinceUpdate": -3.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0094",
-      "imei": "862798051934137",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT040-0005",
+      "imei": "862798051935258",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 08:13:26",
-      "hoursSinceUpdate": -5.4,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0182",
-      "imei": "862798051934673",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:29:16",
-      "hoursSinceUpdate": -5.6,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0109",
-      "imei": "864993060310597",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:54:03",
-      "hoursSinceUpdate": -6.0,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0204",
-      "imei": "864993060309177",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:56:20",
-      "hoursSinceUpdate": -6.1,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0275",
-      "imei": "862798052240385",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:19:49",
-      "hoursSinceUpdate": -6.5,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0113",
-      "imei": "862798051924864",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:23:05",
-      "hoursSinceUpdate": -6.5,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0106",
-      "imei": "862798051931869",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:24:22",
-      "hoursSinceUpdate": -6.5,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0122",
-      "imei": "862798051932651",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:24:49",
-      "hoursSinceUpdate": -6.5,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0148",
-      "imei": "862798051919955",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:20:16",
-      "hoursSinceUpdate": -6.5,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0151",
-      "imei": "862798051919823",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:24:44",
-      "hoursSinceUpdate": -6.5,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0210",
-      "imei": "862798051921332",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:24:18",
-      "hoursSinceUpdate": -6.5,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0168",
-      "imei": "864993060311462",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:30:26",
-      "hoursSinceUpdate": -6.6,
+      "lastUpdate": "2026-06-21 10:43:17",
+      "hoursSinceUpdate": -3.3,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0145",
       "imei": "862798051924096",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:30:12",
+      "lastUpdate": "2026-06-21 11:13:40",
+      "hoursSinceUpdate": -3.8,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0180",
+      "imei": "862798051920680",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 11:39:08",
+      "hoursSinceUpdate": -4.2,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0162",
+      "imei": "862798051926190",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 12:07:42",
+      "hoursSinceUpdate": -4.7,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0183",
+      "imei": "862798051927537",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "STATIC",
+      "lastUpdate": "2026-06-21 12:16:01",
+      "hoursSinceUpdate": -4.8,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0094",
+      "imei": "862798051934137",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 12:20:22",
+      "hoursSinceUpdate": -4.9,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0142",
+      "imei": "862798051933683",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 12:53:40",
+      "hoursSinceUpdate": -5.4,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0279",
+      "imei": "862798052238009",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 12:57:07",
+      "hoursSinceUpdate": -5.5,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0160",
+      "imei": "862798051920649",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 13:02:23",
+      "hoursSinceUpdate": -5.6,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0182",
+      "imei": "862798051934673",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 13:15:16",
+      "hoursSinceUpdate": -5.8,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT040-0012",
+      "imei": "862798051918924",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 13:17:31",
+      "hoursSinceUpdate": -5.8,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT040-0015",
+      "imei": "862798051918999",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 13:14:16",
+      "hoursSinceUpdate": -5.8,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0129",
+      "imei": "862798051924245",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 13:21:15",
+      "hoursSinceUpdate": -5.9,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0163",
+      "imei": "862798051927412",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 13:28:27",
+      "hoursSinceUpdate": -6.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0184",
+      "imei": "864993060312239",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 13:34:20",
+      "hoursSinceUpdate": -6.1,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0122",
+      "imei": "862798051932651",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 13:37:05",
+      "hoursSinceUpdate": -6.1,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0176",
+      "imei": "864993060309003",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 13:41:56",
+      "hoursSinceUpdate": -6.2,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0111",
+      "imei": "862798051745988",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 13:44:35",
+      "hoursSinceUpdate": -6.3,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0168",
+      "imei": "864993060311462",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 13:46:28",
+      "hoursSinceUpdate": -6.3,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0113",
+      "imei": "862798051924864",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 13:47:40",
+      "hoursSinceUpdate": -6.3,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT040-0023",
+      "imei": "862798051934038",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 13:44:42",
+      "hoursSinceUpdate": -6.3,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0170",
+      "imei": "862798051927933",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 13:49:43",
+      "hoursSinceUpdate": -6.4,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0139",
+      "imei": "862798051745681",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 14:00:32",
+      "hoursSinceUpdate": -6.5,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0099",
+      "imei": "862798051924252",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "STATIC",
+      "lastUpdate": "2026-06-21 13:59:40",
+      "hoursSinceUpdate": -6.5,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0120",
+      "imei": "862798051934608",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 14:01:03",
+      "hoursSinceUpdate": -6.5,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0153",
+      "imei": "865478070068269",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 14:04:24",
+      "hoursSinceUpdate": -6.6,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT040-0001",
+      "imei": "864993060310621",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 14:02:19",
+      "hoursSinceUpdate": -6.6,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0278",
+      "imei": "862798052240591",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 14:03:18",
+      "hoursSinceUpdate": -6.6,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0130",
+      "imei": "862798051923676",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 14:06:44",
       "hoursSinceUpdate": -6.6,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0173",
       "imei": "862798051923692",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:30:05",
+      "lastUpdate": "2026-06-21 14:03:15",
       "hoursSinceUpdate": -6.6,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0180",
-      "imei": "862798051920680",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:30:39",
-      "hoursSinceUpdate": -6.6,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0096",
-      "imei": "864993060311694",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0080",
+      "imei": "865478070068384",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 09:33:29",
+      "lastUpdate": "2026-06-21 14:12:16",
       "hoursSinceUpdate": -6.7,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0150",
-      "imei": "864993060310647",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0284",
+      "imei": "862798052237878",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:32:26",
-      "hoursSinceUpdate": -6.7,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0277",
-      "imei": "862798052240880",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:33:17",
+      "lastUpdate": "2026-06-21 14:12:57",
       "hoursSinceUpdate": -6.7,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0166",
       "imei": "864993060308989",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:32:00",
+      "lastUpdate": "2026-06-21 14:11:10",
       "hoursSinceUpdate": -6.7,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0196",
-      "imei": "862798051919724",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 09:36:41",
+      "deviceName": "DT030-0219",
+      "imei": "864993060312023",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 14:12:13",
       "hoursSinceUpdate": -6.7,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0282",
-      "imei": "865478070112315",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0146",
+      "imei": "862798051925804",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:42:03",
+      "lastUpdate": "2026-06-21 14:11:09",
+      "hoursSinceUpdate": -6.7,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0116",
+      "imei": "862798051921233",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 14:12:36",
+      "hoursSinceUpdate": -6.7,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0083",
+      "imei": "865478070112570",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 14:14:33",
       "hoursSinceUpdate": -6.8,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0195",
-      "imei": "864993060309144",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0283",
+      "imei": "862798052240476",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:38:32",
+      "lastUpdate": "2026-06-21 14:13:39",
       "hoursSinceUpdate": -6.8,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0176",
-      "imei": "864993060309003",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0108",
+      "imei": "864993060310779",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:39:54",
+      "lastUpdate": "2026-06-21 14:14:36",
       "hoursSinceUpdate": -6.8,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0184",
-      "imei": "864993060312239",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0124",
+      "imei": "862798051920581",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 09:41:56",
+      "lastUpdate": "2026-06-21 14:13:32",
       "hoursSinceUpdate": -6.8,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0147",
-      "imei": "862798051918833",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:38:50",
-      "hoursSinceUpdate": -6.8,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0170",
-      "imei": "862798051927933",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:37:33",
-      "hoursSinceUpdate": -6.8,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0217",
-      "imei": "862798051921902",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:39:39",
-      "hoursSinceUpdate": -6.8,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0230",
-      "imei": "862798051931752",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:42:19",
-      "hoursSinceUpdate": -6.8,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT040-0015",
-      "imei": "862798051918999",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 09:41:58",
-      "hoursSinceUpdate": -6.8,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0133",
-      "imei": "865478070065315",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:48:58",
-      "hoursSinceUpdate": -6.9,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0276",
-      "imei": "862798052240625",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:46:38",
-      "hoursSinceUpdate": -6.9,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0278",
-      "imei": "862798052240591",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:46:52",
-      "hoursSinceUpdate": -6.9,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT040-0029",
-      "imei": "864993060310654",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:45:46",
-      "hoursSinceUpdate": -6.9,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0164",
-      "imei": "864993060308906",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:49:00",
-      "hoursSinceUpdate": -6.9,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0075",
-      "imei": "864993060310712",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 09:44:21",
-      "hoursSinceUpdate": -6.9,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0157",
-      "imei": "862798051932107",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:47:37",
-      "hoursSinceUpdate": -6.9,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0185",
-      "imei": "862798051934202",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:47:47",
-      "hoursSinceUpdate": -6.9,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0201",
       "imei": "862798051935175",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:48:13",
-      "hoursSinceUpdate": -6.9,
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 14:16:03",
+      "hoursSinceUpdate": -6.8,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0254",
       "imei": "862798051929236",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 14:15:07",
+      "hoursSinceUpdate": -6.8,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT040-0004",
+      "imei": "862798051930747",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "STATIC",
+      "lastUpdate": "2026-06-21 14:13:55",
+      "hoursSinceUpdate": -6.8,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT040-0025",
+      "imei": "864993060311116",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:49:12",
+      "lastUpdate": "2026-06-21 14:24:24",
       "hoursSinceUpdate": -6.9,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0285",
-      "imei": "862798051921225",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0195",
+      "imei": "864993060309144",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:49:16",
+      "lastUpdate": "2026-06-21 14:21:14",
+      "hoursSinceUpdate": -6.9,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0252",
+      "imei": "864993060309128",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "STATIC",
+      "lastUpdate": "2026-06-21 14:22:37",
+      "hoursSinceUpdate": -6.9,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0134",
+      "imei": "864993060310951",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 14:25:02",
+      "hoursSinceUpdate": -6.9,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0188",
+      "imei": "862798051930259",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 14:24:24",
+      "hoursSinceUpdate": -6.9,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0106",
+      "imei": "862798051931869",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 14:24:06",
+      "hoursSinceUpdate": -6.9,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0107",
+      "imei": "862798051932123",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 14:20:05",
+      "hoursSinceUpdate": -6.9,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0148",
+      "imei": "862798051919955",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 14:19:19",
+      "hoursSinceUpdate": -6.9,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0199",
+      "imei": "862798051935316",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 14:22:57",
       "hoursSinceUpdate": -6.9,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0281",
       "imei": "865478070338191",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:51:50",
+      "lastUpdate": "2026-06-21 14:28:06",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0153",
-      "imei": "865478070068269",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0282",
+      "imei": "865478070112315",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:50:50",
+      "lastUpdate": "2026-06-21 14:27:51",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0083",
-      "imei": "865478070112570",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0133",
+      "imei": "865478070065315",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:09",
+      "lastUpdate": "2026-06-21 14:27:58",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0089",
       "imei": "864993060622298",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:05",
+      "lastUpdate": "2026-06-21 14:27:29",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0159",
       "imei": "864993060624013",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 09:52:05",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 14:28:07",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT040-0026",
       "imei": "864993060623833",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 09:52:03",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 14:25:32",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT040-0025",
-      "imei": "864993060311116",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0096",
+      "imei": "864993060311694",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:14",
-      "hoursSinceUpdate": -7.0,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0139",
-      "imei": "862798051745681",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:49:53",
-      "hoursSinceUpdate": -7.0,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT040-0001",
-      "imei": "864993060310621",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:07",
+      "lastUpdate": "2026-06-21 14:28:07",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0105",
       "imei": "864993060310415",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:07",
-      "hoursSinceUpdate": -7.0,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0252",
-      "imei": "864993060309128",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 09:52:13",
+      "lastUpdate": "2026-06-21 14:28:05",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0218 ",
       "imei": "864993060311280",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:51:58",
+      "lastUpdate": "2026-06-21 14:27:27",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0283",
-      "imei": "862798052240476",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0150",
+      "imei": "864993060310647",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:03",
+      "lastUpdate": "2026-06-21 14:27:26",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0276",
+      "imei": "862798052240625",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 14:28:00",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0280",
       "imei": "862798052241078",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:51:28",
+      "lastUpdate": "2026-06-21 14:27:54",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0284",
-      "imei": "862798052237878",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0277",
+      "imei": "862798052240880",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:50:21",
+      "lastUpdate": "2026-06-21 14:26:50",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0279",
-      "imei": "862798052238009",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0275",
+      "imei": "862798052240385",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:10",
+      "lastUpdate": "2026-06-21 14:28:09",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT040-0029",
+      "imei": "864993060310654",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 14:27:40",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT040-0020",
       "imei": "864993060311124",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:51:53",
+      "lastUpdate": "2026-06-21 14:25:30",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0134",
-      "imei": "864993060310951",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0109",
+      "imei": "864993060310597",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:11",
+      "lastUpdate": "2026-06-21 14:28:07",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0121",
       "imei": "864993060308070",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 09:51:15",
-      "hoursSinceUpdate": -7.0,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0108",
-      "imei": "864993060310779",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 09:51:34",
-      "hoursSinceUpdate": -7.0,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0219",
-      "imei": "864993060312023",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:51:10",
+      "lastUpdate": "2026-06-21 14:28:00",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0077",
       "imei": "864993060309748",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 09:51:52",
+      "lastUpdate": "2026-06-21 14:27:55",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0204",
+      "imei": "864993060309177",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 14:27:40",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0164",
+      "imei": "864993060308906",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 14:26:34",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0212",
+      "imei": "864993060309722",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 14:28:04",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0179",
       "imei": "864993060307627",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:09",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "STATIC",
+      "lastUpdate": "2026-06-21 14:27:15",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0124",
-      "imei": "862798051920581",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0075",
+      "imei": "864993060310712",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:50:51",
+      "lastUpdate": "2026-06-21 14:28:02",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0161",
       "imei": "862798051933071",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:06",
+      "lastUpdate": "2026-06-21 14:26:46",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0127",
       "imei": "862798051923825",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:49:54",
-      "hoursSinceUpdate": -7.0,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0188",
-      "imei": "862798051930259",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:07",
-      "hoursSinceUpdate": -7.0,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0162",
-      "imei": "862798051926190",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:12",
-      "hoursSinceUpdate": -7.0,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0099",
-      "imei": "862798051924252",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:51:03",
+      "lastUpdate": "2026-06-21 14:27:52",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0114",
       "imei": "862798051935639",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:10",
-      "hoursSinceUpdate": -7.0,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0120",
-      "imei": "862798051934608",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:11",
+      "lastUpdate": "2026-06-21 14:27:37",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0123",
       "imei": "862798051923775",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:03",
+      "lastUpdate": "2026-06-21 14:26:32",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0130",
-      "imei": "862798051923676",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0147",
+      "imei": "862798051918833",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:13",
+      "lastUpdate": "2026-06-21 14:27:50",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0142",
-      "imei": "862798051933683",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0151",
+      "imei": "862798051919823",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:09",
+      "lastUpdate": "2026-06-21 14:26:57",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0157",
+      "imei": "862798051932107",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 14:27:26",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0178",
       "imei": "862798051924419",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:13",
+      "lastUpdate": "2026-06-21 14:28:02",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0185",
+      "imei": "862798051934202",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 14:27:54",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0189",
       "imei": "862798051924294",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:51:01",
+      "lastUpdate": "2026-06-21 14:28:10",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0199",
-      "imei": "862798051935316",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0196",
+      "imei": "862798051919724",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:50:59",
+      "lastUpdate": "2026-06-21 14:28:05",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0207",
+      "imei": "862798051921357",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 14:28:03",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0209",
       "imei": "862798051919799",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:12",
+      "lastUpdate": "2026-06-21 14:26:06",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT040-0004",
-      "imei": "862798051930747",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0210",
+      "imei": "862798051921332",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:51:40",
+      "lastUpdate": "2026-06-21 14:26:44",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT040-0012",
-      "imei": "862798051918924",
-      "groupName": "DT RTP FIX",
+      "deviceName": "DT030-0217",
+      "imei": "862798051921902",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:50:21",
+      "lastUpdate": "2026-06-21 14:28:09",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0230",
+      "imei": "862798051931752",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 14:28:09",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0285",
+      "imei": "862798051921225",
+      "groupName": "DT ROM TO PORT",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 14:28:07",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
       "deviceName": "DT040-0019",
       "imei": "862798051924351",
-      "groupName": "DT RTP FIX",
+      "groupName": "DT ROM TO PORT",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:52:12",
+      "lastUpdate": "2026-06-21 14:25:29",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     }
