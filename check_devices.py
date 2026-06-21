@@ -108,13 +108,27 @@ def login_and_fetch_devices(playwright) -> list:
     else:
         print("PERINGATAN: token di localStorage kosong/null!")
 
+    # Coba ambil userId dari localStorage (biasanya tersimpan setelah login,
+    # dipakai UI untuk semua request berikutnya termasuk queryEquipmentList).
+    user_id = page.evaluate("""() => {
+        try {
+            const userInfo = localStorage.getItem('userInfo');
+            if (userInfo) {
+                const parsed = JSON.parse(userInfo);
+                return parsed.id || parsed.userId || null;
+            }
+        } catch (e) {}
+        return null;
+    }""")
+    print(f"userId terdeteksi: {user_id}")
+
     # Panggil endpoint device list LANGSUNG dari dalam browser (pakai fetch),
     # supaya semua header/auth/cookie otomatis persis seperti request asli.
     payload = {
         "imei": "",
         "startRow": "0",
         "userType": 8,
-        "userId": "",
+        "userId": user_id or "",
         "isNewMcType": "0",
         "orgId": "",
         "pageSize": 1000,
@@ -151,9 +165,14 @@ def login_and_fetch_devices(playwright) -> list:
     if result["status"] != 200:
         raise SystemExit(f"Gagal ambil device list. Status: {result['status']}, Body: {result['text'][:500]}")
 
+    print(f"Device list raw response (500 char pertama): {result['text'][:500]}")
+
     data = json.loads(result["text"])
     if not data.get("ok", False):
         raise SystemExit(f"Gagal ambil device list. Response: {data}")
+
+    device_count = len(data.get("data", []))
+    print(f"Jumlah device dalam response: {device_count}")
 
     return data.get("data", [])
 
