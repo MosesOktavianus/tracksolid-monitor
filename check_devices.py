@@ -189,68 +189,23 @@ def login_and_fetch_devices(playwright, account: str, password: str, label: str)
     }""")
     print(f"[{label}] userId terdeteksi: {user_id}")
 
-    # Coba ambil orgId dari localStorage juga -- field ini wajib diisi
-    # (bukan string kosong) supaya server tidak menolak dengan IllegalParameter.
-    # Coba beberapa kemungkinan lokasi: userInfo.orgId, atau key terpisah.
-    org_id = page.evaluate("""() => {
-        try {
-            const userInfo = localStorage.getItem('userInfo');
-            if (userInfo) {
-                const parsed = JSON.parse(userInfo);
-                if (parsed.orgId) return parsed.orgId;
-            }
-        } catch (e) {}
-        // Coba cari di semua key localStorage yang namanya mengandung 'org'
-        try {
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key && key.toLowerCase().includes('org')) {
-                    const val = localStorage.getItem(key);
-                    if (val && val.length > 10 && val.length < 50) return val;
-                }
-            }
-        } catch (e) {}
-        return null;
-    }""")
-    print(f"[{label}] orgId terdeteksi dari localStorage: {org_id}")
+    # CATATAN PENTING: berdasarkan banyak percobaan, field orgId di payload
+    # TIDAK BISA diambil secara reliable dari localStorage atau getUserGroup API --
+    # keduanya selalu mengembalikan null/None untuk semua akun yang dicoba.
+    # Yang TERBUKTI berhasil (untuk akun pertama, 363 device) adalah kombinasi:
+    # 1) klik eksplisit node Account List di UI (sudah dilakukan di atas, supaya
+    #    server set "grup aktif" di sisi server)
+    # 2) orgId di payload dikirim KOSONG (server pakai context dari klik UI itu)
+    # Untuk akun lain, kita coba pendekatan sama: klik UI + orgId kosong.
+    org_id = ""
 
-    # Kalau masih tidak ketemu dari localStorage, coba panggil getUserGroup
-    # langsung -- endpoint ini mengembalikan info org termasuk orgId/id user.
-    if not org_id:
-        try:
-            user_group_result = page.evaluate("""async () => {
-                const token = localStorage.getItem('token');
-                const resp = await fetch('/v3/new/newDevice/getUserGroup', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json;charset=UTF-8',
-                        'Accept': 'application/json, text/plain, */*',
-                        'Authorization': token,
-                        'Must': 'true',
-                    },
-                    body: JSON.stringify({}),
-                });
-                const text = await resp.text();
-                return text;
-            }""")
-            print(f"[{label}] getUserGroup response (300 char pertama): {user_group_result[:300]}")
-            ug_data = json.loads(user_group_result)
-            # Coba beberapa kemungkinan struktur response untuk cari orgId
-            ug_payload = ug_data.get("data", {})
-            if isinstance(ug_payload, dict):
-                org_id = ug_payload.get("orgId") or ug_payload.get("id")
-                if org_id:
-                    org_id = str(org_id)
-            print(f"[{label}] orgId dari getUserGroup: {org_id}")
-        except Exception as e:
-            print(f"[{label}] Gagal panggil getUserGroup: {e}")
-
-    def call_device_list_api(use_org_id, include_org_id=True):
+    def call_device_list_api(use_org_id):
         payload = {
             "imei": "",
             "startRow": "0",
             "userType": 8,
             "userId": int(user_id) if user_id else "",
+            "orgId": use_org_id or "",
             "siftType": "",
             "sortType": "",
             "sortRule": "",
@@ -259,8 +214,6 @@ def login_and_fetch_devices(playwright, account: str, password: str, label: str)
             "type": "NORMAL",
             "searchStatus": "ALL",
         }
-        if include_org_id:
-            payload["orgId"] = use_org_id or ""
         return page.evaluate(
             """async (payload) => {
                 const token = localStorage.getItem('token');
@@ -292,24 +245,14 @@ def login_and_fetch_devices(playwright, account: str, password: str, label: str)
             return False
 
     if is_illegal_parameter(result):
-        print(f"[{label}] Percobaan 1 (dengan orgId='{org_id}') IllegalParameter, coba tanpa field orgId...")
-        result = call_device_list_api(None, include_org_id=False)
+        print(f"[{label}] Percobaan 1 IllegalParameter, tunggu 5 detik lalu coba lagi (state server mungkin belum settle)...")
+        page.wait_for_timeout(5000)
+        result = call_device_list_api(org_id)
 
     if is_illegal_parameter(result):
-        print(f"[{label}] Percobaan 2 (tanpa orgId) masih IllegalParameter, coba ulang dengan delay tambahan...")
-        page.wait_for_timeout(4000)
-        org_id_retry = page.evaluate("""() => {
-            try {
-                const userInfo = localStorage.getItem('userInfo');
-                if (userInfo) {
-                    const parsed = JSON.parse(userInfo);
-                    if (parsed.orgId) return parsed.orgId;
-                }
-            } catch (e) {}
-            return null;
-        }""")
-        print(f"[{label}] orgId percobaan ke-3: {org_id_retry}")
-        result = call_device_list_api(org_id_retry or org_id)
+        print(f"[{label}] Percobaan 2 masih IllegalParameter, tunggu 8 detik lagi sebagai upaya terakhir...")
+        page.wait_for_timeout(8000)
+        result = call_device_list_api(org_id)
 
     browser.close()
 
