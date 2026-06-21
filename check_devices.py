@@ -25,7 +25,26 @@ from playwright.sync_api import sync_playwright
 BASE_URL = "https://www.tracksolidpro.com"
 DEVICE_LIST_URL = f"{BASE_URL}/v3/new/newEquipment/queryEquipmentList"
 
-OFFLINE_THRESHOLD_HOURS = 12
+OFFLINE_THRESHOLD_HOURS = 8  # threshold terendah (dipakai untuk hitungan "totalOffline" dasar)
+OFFLINE_LEVELS = [
+    (36, "offline-36"),
+    (24, "offline-24"),
+    (12, "offline-12"),
+    (8, "offline-8"),
+]  # urutan dari paling parah ke paling ringan -- dicek dari atas
+
+
+def get_offline_level(hours_since: float):
+    """
+    Kembalikan level offline berdasarkan berapa jam device tidak update.
+    None artinya device masih online (di bawah 8 jam).
+    """
+    if hours_since is None:
+        return "offline-36"
+    for threshold_hours, level in OFFLINE_LEVELS:
+        if hours_since >= threshold_hours:
+            return level
+    return None
 
 DATA_FILE = "devices.json"
 PREVIOUS_FILE = "devices_previous.json"
@@ -33,11 +52,37 @@ PREVIOUS_FILE = "devices_previous.json"
 ACCOUNT = os.environ.get("TSP_ACCOUNT")
 PASSWORD = os.environ.get("TSP_PASSWORD")
 
-if not ACCOUNT or not PASSWORD:
-    raise SystemExit("ERROR: set environment variable TSP_ACCOUNT dan TSP_PASSWORD dulu.")
+# Dukung sampai 5 akun TrackSolid sekaligus, digabung jadi satu dashboard.
+# Akun pertama pakai TSP_ACCOUNT/TSP_PASSWORD (kompatibel dengan setup lama).
+# Akun ke-2 sampai 5 pakai TSP_ACCOUNT_2/TSP_PASSWORD_2, dst.
+# Label akun (opsional, untuk tampilan di web) lewat TSP_LABEL_1, TSP_LABEL_2, dst.
+def load_accounts():
+    accounts = []
+    if ACCOUNT and PASSWORD:
+        accounts.append({
+            "account": ACCOUNT,
+            "password": PASSWORD,
+            "label": os.environ.get("TSP_LABEL_1", ACCOUNT),
+        })
+    for i in range(2, 6):
+        acc = os.environ.get(f"TSP_ACCOUNT_{i}")
+        pwd = os.environ.get(f"TSP_PASSWORD_{i}")
+        if acc and pwd:
+            accounts.append({
+                "account": acc,
+                "password": pwd,
+                "label": os.environ.get(f"TSP_LABEL_{i}", acc),
+            })
+    return accounts
 
 
-def login_and_fetch_devices(playwright) -> list:
+ACCOUNTS = load_accounts()
+
+if not ACCOUNTS:
+    raise SystemExit("ERROR: set minimal TSP_ACCOUNT dan TSP_PASSWORD (akun pertama).")
+
+
+def login_and_fetch_devices(playwright, account: str, password: str, label: str) -> list:
     """
     Buka browser headless, login manual lewat form, lalu panggil endpoint device list
     LANGSUNG DARI DALAM BROWSER CONTEXT (pakai fetch JS), supaya semua header/cookie/token
@@ -46,7 +91,7 @@ def login_and_fetch_devices(playwright) -> list:
     browser = playwright.chromium.launch(headless=True)
     page = browser.new_page()
 
-    print("Membuka halaman login...")
+    print(f"[{label}] Membuka halaman login...")
     page.goto(f"{BASE_URL}/resource/dev/index.html#/login", wait_until="networkidle", timeout=60000)
 
     page.wait_for_selector("input", timeout=30000)
@@ -56,14 +101,15 @@ def login_and_fetch_devices(playwright) -> list:
     for inp in inputs:
         input_type = inp.get_attribute("type")
         if input_type == "password":
-            inp.fill(PASSWORD)
+            inp.fill(password)
         elif not username_filled and input_type in ("text", "email", None):
-            inp.fill(ACCOUNT)
+            inp.fill(account)
             username_filled = True
 
     if not username_filled:
-        page.screenshot(path="debug_login_page.png")
-        raise SystemExit("Tidak ketemu input username. Screenshot disimpan ke debug_login_page.png")
+        page.screenshot(path=f"debug_login_page_{label}.png")
+        browser.close()
+        raise SystemExit(f"[{label}] Tidak ketemu input username. Screenshot disimpan.")
 
     clicked = False
     selectors_to_try = [
@@ -82,14 +128,16 @@ def login_and_fetch_devices(playwright) -> list:
             continue
 
     if not clicked:
-        page.screenshot(path="debug_before_click.png")
-        raise SystemExit(f"Tidak bisa klik tombol login dengan selector manapun. Error terakhir: {last_error}")
+        page.screenshot(path=f"debug_before_click_{label}.png")
+        browser.close()
+        raise SystemExit(f"[{label}] Tidak bisa klik tombol login dengan selector manapun. Error terakhir: {last_error}")
 
     try:
         page.wait_for_url("**/monitorObject**", timeout=30000)
     except Exception:
-        page.screenshot(path="debug_after_click.png")
-        print(f"URL saat ini: {page.url}")
+        page.screenshot(path=f"debug_after_click_{label}.png")
+        print(f"[{label}] URL saat ini: {page.url}")
+        browser.close()
         raise
 
     # Tunggu network idle supaya semua request awal halaman monitor
@@ -99,11 +147,23 @@ def login_and_fetch_devices(playwright) -> list:
     except Exception:
         pass  # kalau timeout, lanjut saja -- network idle tidak selalu tercapai di SPA
 
-    page.wait_for_timeout(5000)
-    print("Login berhasil.")
+    page.wait_for_timeout(3000)
 
-    # Coba ambil userId dari localStorage (biasanya tersimpan setelah login,
-    # dipakai UI untuk semua request berikutnya termasuk queryEquipmentList).
+    # PENTING: klik node teratas di Account List (induk organisasi) secara eksplisit.
+    # Server TrackSolid sepertinya menyimpan "grup aktif" berdasarkan klik UI terakhir,
+    # bukan murni dari payload orgId -- tanpa klik ini, device list yang didapat
+    # cuma mencakup sub-grup pertama (108 device), bukan semua (363 device).
+    try:
+        account_list_item = page.locator("text=/Stock\\d+\\/Total\\d+/").first
+        account_list_item.click(timeout=10000)
+        page.wait_for_timeout(3000)
+        print(f"[{label}] Berhasil klik node induk organisasi di Account List.")
+    except Exception as e:
+        print(f"[{label}] PERINGATAN: gagal klik node Account List ({e}), lanjut tanpa klik eksplisit.")
+
+    page.wait_for_timeout(5000)
+    print(f"[{label}] Login berhasil.")
+
     user_id = page.evaluate("""() => {
         try {
             const userInfo = localStorage.getItem('userInfo');
@@ -114,7 +174,7 @@ def login_and_fetch_devices(playwright) -> list:
         } catch (e) {}
         return null;
     }""")
-    print(f"userId terdeteksi: {user_id}")
+    print(f"[{label}] userId terdeteksi: {user_id}")
 
     # Coba ambil orgId dari localStorage juga -- field ini wajib diisi
     # (bukan string kosong) supaya server tidak menolak dengan IllegalParameter.
@@ -128,13 +188,7 @@ def login_and_fetch_devices(playwright) -> list:
         } catch (e) {}
         return null;
     }""")
-    print(f"orgId terdeteksi dari localStorage: {org_id}")
-
-    # Fallback: kalau orgId tidak ketemu otomatis dari localStorage, pakai nilai
-    # yang sudah dikonfirmasi benar dari DevTools (akun ini spesifik milik 1 organisasi).
-    if not org_id:
-        org_id = "b461e9bed2924341ae8b7c6e1b5ad0f4"
-        print(f"orgId pakai fallback hardcoded: {org_id}")
+    print(f"[{label}] orgId terdeteksi dari localStorage: {org_id}")
 
     # Panggil endpoint device list LANGSUNG dari dalam browser (pakai fetch),
     # supaya semua header/auth/cookie otomatis persis seperti request asli.
@@ -178,16 +232,19 @@ def login_and_fetch_devices(playwright) -> list:
     browser.close()
 
     if result["status"] != 200:
-        raise SystemExit(f"Gagal ambil device list. Status: {result['status']}, Body: {result['text'][:500]}")
+        raise SystemExit(f"[{label}] Gagal ambil device list. Status: {result['status']}, Body: {result['text'][:500]}")
 
-    print(f"Device list raw response (500 char pertama): {result['text'][:500]}")
+    print(f"[{label}] Device list raw response (500 char pertama): {result['text'][:500]}")
 
     data = json.loads(result["text"])
     if not data.get("ok", False):
-        raise SystemExit(f"Gagal ambil device list. Response: {data}")
+        raise SystemExit(f"[{label}] Gagal ambil device list. Response: {data}")
 
     all_devices = data.get("data", [])
-    print(f"Total device terkumpul: {len(all_devices)}")
+    for d in all_devices:
+        d["_accountLabel"] = label  # tag asal akun, dipakai nanti untuk tampilan di web
+
+    print(f"[{label}] Total device terkumpul: {len(all_devices)}")
     return all_devices
 
 
@@ -202,7 +259,6 @@ def parse_gps_time(gps_time_str: str):
 
 def process_devices(raw_devices: list) -> list:
     now = datetime.now()
-    threshold = timedelta(hours=OFFLINE_THRESHOLD_HOURS)
     processed = []
 
     for d in raw_devices:
@@ -213,21 +269,28 @@ def process_devices(raw_devices: list) -> list:
         status_raw = d.get("status", "")
 
         if last_update is None:
-            is_offline = True
             hours_since = None
+            offline_level = "offline-36"
+            is_offline = True
+            is_recently_online = False
         else:
             delta = now - last_update
             hours_since = round(delta.total_seconds() / 3600, 1)
-            is_offline = delta > threshold
+            offline_level = get_offline_level(hours_since)
+            is_offline = offline_level is not None
+            is_recently_online = hours_since <= 1.0
 
         processed.append({
             "deviceName": name,
             "imei": imei,
             "groupName": d.get("orgName", ""),
+            "accountLabel": d.get("_accountLabel", ""),
             "statusRaw": status_raw,
             "lastUpdate": gps_time_str,
             "hoursSinceUpdate": hours_since,
             "isOffline": is_offline,
+            "offlineLevel": offline_level,
+            "isRecentlyOnline": is_recently_online,  # update dalam 1 jam terakhir
         })
 
     processed.sort(key=lambda x: (not x["isOffline"], -(x["hoursSinceUpdate"] or 0)))
@@ -242,10 +305,17 @@ def load_previous() -> dict:
 
 
 def detect_new_offline(processed: list, previous_status: dict) -> list:
+    """
+    Device yang baru OFFLINE di level >= 12 jam (bukan 8 jam) -- supaya email
+    tidak terlalu sering terkirim untuk device yang baru sebentar offline.
+    Level 8 jam tetap ditampilkan di web (badge), tapi tidak memicu email.
+    """
+    EMAIL_ALERT_LEVELS = {"offline-12", "offline-24", "offline-36"}
     newly_offline = []
     for d in processed:
         prev_offline = previous_status.get(d["imei"])
-        if d["isOffline"] and prev_offline is False:
+        currently_alertable = d["offlineLevel"] in EMAIL_ALERT_LEVELS
+        if currently_alertable and prev_offline is False:
             newly_offline.append(d)
     return newly_offline
 
@@ -325,13 +395,29 @@ def send_email_alert(newly_offline: list):
 
 
 def main():
-    with sync_playwright() as playwright:
-        raw_devices = login_and_fetch_devices(playwright)
+    print(f"Total akun yang akan dicek: {len(ACCOUNTS)}")
+    all_raw_devices = []
 
-    print(f"Total device diterima dari server: {len(raw_devices)}")
+    with sync_playwright() as playwright:
+        for acc in ACCOUNTS:
+            try:
+                devices = login_and_fetch_devices(
+                    playwright, acc["account"], acc["password"], acc["label"]
+                )
+                all_raw_devices.extend(devices)
+            except Exception as e:
+                # Satu akun gagal tidak boleh menggagalkan semuanya --
+                # log error-nya, lanjut ke akun berikutnya.
+                print(f"[{acc['label']}] GAGAL: {e}")
+                continue
+
+    print(f"Total device diterima dari SEMUA akun: {len(all_raw_devices)}")
+
+    if not all_raw_devices:
+        raise SystemExit("Tidak ada device yang berhasil diambil dari akun manapun. Cek log di atas untuk detail error per akun.")
 
     previous_status = load_previous()
-    processed = process_devices(raw_devices)
+    processed = process_devices(all_raw_devices)
     newly_offline = detect_new_offline(processed, previous_status)
 
     save_results(processed)
