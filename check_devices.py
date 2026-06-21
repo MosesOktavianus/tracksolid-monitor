@@ -124,57 +124,72 @@ def login_and_fetch_devices(playwright) -> list:
 
     # Panggil endpoint device list LANGSUNG dari dalam browser (pakai fetch),
     # supaya semua header/auth/cookie otomatis persis seperti request asli.
-    payload = {
-        "imei": "",
-        "startRow": "0",
-        "userType": 8,
-        "userId": user_id or "",
-        "isNewMcType": "0",
-        "orgId": "",
-        "pageSize": 1000,
-        "searchStatus": "",
-        "siftType": "",
-        "sortRule": "",
-        "sortType": "",
-        "type": "NORMAL",
-        "videoEntry": "",
-    }
+    all_devices = []
+    start_row = 0
+    page_size = 100  # nilai ini terbukti valid dari payload asli (pageSize: 100)
 
-    result = page.evaluate(
-        """async (payload) => {
-            const token = localStorage.getItem('token');
-            const resp = await fetch('/v3/new/newEquipment/queryEquipmentList', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8',
-                    'Accept': 'application/json, text/plain, */*',
-                    'Authorization': token,
-                    'Must': 'true',
-                },
-                body: JSON.stringify(payload),
-            });
-            const status = resp.status;
-            const text = await resp.text();
-            return { status, text };
-        }""",
-        payload,
-    )
+    while True:
+        payload = {
+            "imei": "",
+            "startRow": str(start_row),
+            "userType": 8,
+            "userId": int(user_id) if user_id else "",
+            "isNewMcType": "0",
+            "orgId": "",
+            "pageSize": page_size,
+            "searchStatus": "",
+            "siftType": "",
+            "sortRule": "",
+            "sortType": "",
+            "type": "NORMAL",
+            "videoEntry": "",
+        }
+
+        result = page.evaluate(
+            """async (payload) => {
+                const token = localStorage.getItem('token');
+                const resp = await fetch('/v3/new/newEquipment/queryEquipmentList', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=UTF-8',
+                        'Accept': 'application/json, text/plain, */*',
+                        'Authorization': token,
+                        'Must': 'true',
+                    },
+                    body: JSON.stringify(payload),
+                });
+                const status = resp.status;
+                const text = await resp.text();
+                return { status, text };
+            }""",
+            payload,
+        )
+
+        if result["status"] != 200:
+            browser.close()
+            raise SystemExit(f"Gagal ambil device list. Status: {result['status']}, Body: {result['text'][:500]}")
+
+        print(f"Halaman startRow={start_row}: response (300 char pertama): {result['text'][:300]}")
+
+        data = json.loads(result["text"])
+        if not data.get("ok", False):
+            browser.close()
+            raise SystemExit(f"Gagal ambil device list. Response: {data}")
+
+        batch = data.get("data", [])
+        all_devices.extend(batch)
+        print(f"Halaman startRow={start_row}: dapat {len(batch)} device (total sejauh ini: {len(all_devices)})")
+
+        if len(batch) < page_size:
+            break  # halaman terakhir
+        start_row += page_size
+
+        if start_row > 2000:  # safety guard, jangan sampai infinite loop
+            break
 
     browser.close()
-
-    if result["status"] != 200:
-        raise SystemExit(f"Gagal ambil device list. Status: {result['status']}, Body: {result['text'][:500]}")
-
-    print(f"Device list raw response (500 char pertama): {result['text'][:500]}")
-
-    data = json.loads(result["text"])
-    if not data.get("ok", False):
-        raise SystemExit(f"Gagal ambil device list. Response: {data}")
-
-    device_count = len(data.get("data", []))
-    print(f"Jumlah device dalam response: {device_count}")
-
-    return data.get("data", [])
+    print(f"Total device terkumpul: {len(all_devices)}")
+    return all_devices
 
 
 def parse_gps_time(gps_time_str: str):
