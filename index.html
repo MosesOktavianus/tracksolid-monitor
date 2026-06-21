@@ -15,6 +15,10 @@
   }
   .header {
     margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
   }
   .header h1 {
     font-size: 20px;
@@ -24,6 +28,18 @@
     font-size: 13px;
     color: #666;
   }
+  .refresh-btn {
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background: white;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .refresh-btn:active { background: #f0f0f0; }
+  .refresh-btn.spinning { opacity: 0.6; pointer-events: none; }
   .summary {
     display: flex;
     gap: 10px;
@@ -119,13 +135,77 @@
     margin-bottom: 12px;
     font-size: 13px;
   }
+
+  /* Password gate */
+  #lockScreen {
+    position: fixed;
+    inset: 0;
+    background: #f4f6f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+  }
+  .lock-box {
+    background: white;
+    border-radius: 14px;
+    padding: 28px 24px;
+    width: 100%;
+    max-width: 320px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  .lock-box h2 { margin: 0 0 6px 0; font-size: 18px; }
+  .lock-box p { margin: 0 0 18px 0; font-size: 13px; color: #888; }
+  .lock-input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .lock-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .lock-error {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 10px;
+    display: none;
+  }
+  #mainContent { display: none; }
 </style>
 </head>
 <body>
 
+<div id="lockScreen">
+  <div class="lock-box">
+    <h2>🔒 TrackSolid Monitor</h2>
+    <p>Masukkan password untuk melihat data device</p>
+    <input type="password" class="lock-input" id="passwordInput" placeholder="Password" autofocus>
+    <button class="lock-btn" id="unlockBtn">Masuk</button>
+    <div class="lock-error" id="lockError">Password salah, coba lagi.</div>
+  </div>
+</div>
+
+<div id="mainContent">
 <div class="header">
-  <h1>🛰️ TrackSolid Device Monitor</h1>
-  <div class="updated" id="lastUpdated">Memuat data...</div>
+  <div>
+    <h1>🛰️ TrackSolid Device Monitor</h1>
+    <div class="updated" id="lastUpdated">Memuat data...</div>
+  </div>
+  <button class="refresh-btn" id="refreshBtn">🔄 Refresh</button>
 </div>
 
 <div class="summary">
@@ -155,10 +235,60 @@
 <div class="device-list" id="deviceList">
   <div class="loading">Memuat data...</div>
 </div>
+</div>
+
+<script>
+// --- Password gate ---
+// Ganti nilai di bawah ini dengan password pilihanmu.
+const SITE_PASSWORD = "Asdf515!!";
+const SESSION_KEY = "tsp_unlocked";
+
+function checkPassword() {
+  const input = document.getElementById('passwordInput').value;
+  if (input === SITE_PASSWORD) {
+    sessionStorage.setItem(SESSION_KEY, "1");
+    showMainContent();
+  } else {
+    document.getElementById('lockError').style.display = 'block';
+  }
+}
+
+function showMainContent() {
+  document.getElementById('lockScreen').style.display = 'none';
+  document.getElementById('mainContent').style.display = 'block';
+  loadData();
+}
+
+document.getElementById('unlockBtn').addEventListener('click', checkPassword);
+document.getElementById('passwordInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') checkPassword();
+});
+
+// Kalau sudah pernah unlock di tab browser ini (sesi ini), langsung tampilkan
+if (sessionStorage.getItem(SESSION_KEY) === "1") {
+  showMainContent();
+}
+</script>
 
 <script>
 let allDevices = [];
 let currentFilter = 'all';
+
+// Device dengan nama berawalan BD atau EX (contoh: "Ex-DT030-0261", "BD030-0001")
+// dianggap unit tidak aktif / sudah ditarik, jadi disembunyikan dari list & hitungan.
+function isExcludedDevice(deviceName) {
+  const name = (deviceName || '').trim().toLowerCase();
+  return name.startsWith('bd') || name.startsWith('ex');
+}
+
+function formatDateDDMMYYYY(isoLikeString) {
+  if (!isoLikeString) return '-';
+  // Input format dari backend: "YYYY-MM-DD HH:MM:SS"
+  const match = isoLikeString.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}:\d{2}:\d{2})/);
+  if (!match) return isoLikeString;
+  const [, year, month, day, time] = match;
+  return `${day}-${month}-${year} ${time}`;
+}
 
 async function loadData() {
   try {
@@ -166,12 +296,18 @@ async function loadData() {
     if (!res.ok) throw new Error('devices.json tidak ditemukan');
     const data = await res.json();
 
-    document.getElementById('lastUpdated').textContent = 'Terakhir dicek: ' + data.lastChecked;
-    document.getElementById('totalCount').textContent = data.totalDevices;
-    document.getElementById('onlineCount').textContent = data.totalOnline;
-    document.getElementById('offlineCount').textContent = data.totalOffline;
+    document.getElementById('lastUpdated').textContent = 'Terakhir dicek: ' + formatDateDDMMYYYY(data.lastChecked);
 
-    allDevices = data.devices || [];
+    const visibleDevices = (data.devices || []).filter(d => !isExcludedDevice(d.deviceName));
+    const onlineCount = visibleDevices.filter(d => !d.isOffline).length;
+    const offlineCount = visibleDevices.filter(d => d.isOffline).length;
+
+    document.getElementById('totalCount').textContent = visibleDevices.length;
+    document.getElementById('onlineCount').textContent = onlineCount;
+    document.getElementById('offlineCount').textContent = offlineCount;
+
+    allDevices = visibleDevices;
+    document.getElementById('errorBox').innerHTML = '';
     renderList();
   } catch (err) {
     document.getElementById('errorBox').innerHTML =
@@ -179,6 +315,17 @@ async function loadData() {
     document.getElementById('deviceList').innerHTML = '';
   }
 }
+
+async function handleRefreshClick() {
+  const btn = document.getElementById('refreshBtn');
+  btn.classList.add('spinning');
+  btn.textContent = '🔄 Memuat...';
+  await loadData();
+  btn.classList.remove('spinning');
+  btn.textContent = '🔄 Refresh';
+}
+
+document.getElementById('refreshBtn').addEventListener('click', handleRefreshClick);
 
 function renderList() {
   const searchTerm = document.getElementById('searchBox').value.toLowerCase();
@@ -234,8 +381,6 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 });
 
 document.getElementById('searchBox').addEventListener('input', renderList);
-
-loadData();
 </script>
 
 </body>
