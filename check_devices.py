@@ -37,11 +37,11 @@ if not ACCOUNT or not PASSWORD:
     raise SystemExit("ERROR: set environment variable TSP_ACCOUNT dan TSP_PASSWORD dulu.")
 
 
-def login_and_get_session(playwright) -> tuple:
+def login_and_fetch_devices(playwright) -> list:
     """
-    Buka browser headless, login manual lewat form, lalu ambil:
-    - cookies (untuk dipakai di request requests.Session berikutnya)
-    - token dari localStorage (untuk header Authorization)
+    Buka browser headless, login manual lewat form, lalu panggil endpoint device list
+    LANGSUNG DARI DALAM BROWSER CONTEXT (pakai fetch JS), supaya semua header/cookie/token
+    persis seperti request asli dari browser -- tidak perlu rakit ulang manual di requests.
     """
     browser = playwright.chromium.launch(headless=True)
     page = browser.new_page()
@@ -49,10 +49,8 @@ def login_and_get_session(playwright) -> tuple:
     print("Membuka halaman login...")
     page.goto(f"{BASE_URL}/resource/dev/index.html#/login", wait_until="networkidle", timeout=60000)
 
-    # Tunggu form login muncul.
     page.wait_for_selector("input", timeout=30000)
 
-    # Isi form login. Asumsi: input pertama = username, input password = password.
     inputs = page.query_selector_all("input")
     username_filled = False
     for inp in inputs:
@@ -67,8 +65,6 @@ def login_and_get_session(playwright) -> tuple:
         page.screenshot(path="debug_login_page.png")
         raise SystemExit("Tidak ketemu input username. Screenshot disimpan ke debug_login_page.png")
 
-    # Klik tombol login. Dari screenshot debug, tombolnya bertuliskan "Sign in".
-    # Coba beberapa selector sebagai fallback.
     clicked = False
     selectors_to_try = [
         "button:has-text('Sign in')",
@@ -89,45 +85,31 @@ def login_and_get_session(playwright) -> tuple:
         page.screenshot(path="debug_before_click.png")
         raise SystemExit(f"Tidak bisa klik tombol login dengan selector manapun. Error terakhir: {last_error}")
 
-    # Tunggu sampai redirect ke halaman monitor (artinya login sukses)
     try:
         page.wait_for_url("**/monitorObject**", timeout=30000)
     except Exception:
         page.screenshot(path="debug_after_click.png")
         print(f"URL saat ini: {page.url}")
         raise
-    page.wait_for_timeout(2000)  # beri waktu localStorage ke-set
 
-    # Ambil token dari localStorage
-    token = page.evaluate("() => localStorage.getItem('token')")
-    cookies = page.context.cookies()
+    # Tunggu network idle supaya semua request awal halaman monitor
+    # (getUserGroup, queryEquipmentList versi UI, dll) selesai dulu.
+    try:
+        page.wait_for_load_state("networkidle", timeout=20000)
+    except Exception:
+        pass  # kalau timeout, lanjut saja -- network idle tidak selalu tercapai di SPA
 
-    browser.close()
+    page.wait_for_timeout(5000)
+    print("Login berhasil.")
 
-    if not token:
-        raise SystemExit("Gagal mengambil token dari localStorage setelah login.")
+    token_check = page.evaluate("() => localStorage.getItem('token')")
+    if token_check:
+        print(f"Token terdeteksi (panjang: {len(token_check)} karakter, awalan: {token_check[:15]}...)")
+    else:
+        print("PERINGATAN: token di localStorage kosong/null!")
 
-    print("Login berhasil, token & cookies didapat.")
-    return token, cookies
-
-
-def build_requests_session(token: str, cookies: list) -> requests.Session:
-    session = requests.Session()
-    for c in cookies:
-        session.cookies.set(c["name"], c["value"], domain=c.get("domain"))
-    session.headers.update({
-        "Authorization": token,
-        "Content-Type": "application/json;charset=UTF-8",
-        "Accept": "application/json, text/plain, */*",
-        "Origin": BASE_URL,
-        "Referer": f"{BASE_URL}/",
-        "Must": "true",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-    })
-    return session
-
-
-def fetch_all_devices(session: requests.Session) -> list:
+    # Panggil endpoint device list LANGSUNG dari dalam browser (pakai fetch),
+    # supaya semua header/auth/cookie otomatis persis seperti request asli.
     payload = {
         "imei": "",
         "startRow": "0",
@@ -143,14 +125,36 @@ def fetch_all_devices(session: requests.Session) -> list:
         "type": "NORMAL",
         "videoEntry": "",
     }
-    resp = session.post(DEVICE_LIST_URL, json=payload, timeout=30)
-    if resp.status_code != 200:
-        print(f"Device list response status: {resp.status_code}")
-        print(f"Device list response body: {resp.text[:500]}")
-    resp.raise_for_status()
-    data = resp.json()
+
+    result = page.evaluate(
+        """async (payload) => {
+            const token = localStorage.getItem('token');
+            const resp = await fetch('/v3/new/newEquipment/queryEquipmentList', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Accept': 'application/json, text/plain, */*',
+                    'Authorization': token,
+                    'Must': 'true',
+                },
+                body: JSON.stringify(payload),
+            });
+            const status = resp.status;
+            const text = await resp.text();
+            return { status, text };
+        }""",
+        payload,
+    )
+
+    browser.close()
+
+    if result["status"] != 200:
+        raise SystemExit(f"Gagal ambil device list. Status: {result['status']}, Body: {result['text'][:500]}")
+
+    data = json.loads(result["text"])
     if not data.get("ok", False):
         raise SystemExit(f"Gagal ambil device list. Response: {data}")
+
     return data.get("data", [])
 
 
@@ -289,10 +293,8 @@ def send_email_alert(newly_offline: list):
 
 def main():
     with sync_playwright() as playwright:
-        token, cookies = login_and_get_session(playwright)
+        raw_devices = login_and_fetch_devices(playwright)
 
-    session = build_requests_session(token, cookies)
-    raw_devices = fetch_all_devices(session)
     print(f"Total device diterima dari server: {len(raw_devices)}")
 
     previous_status = load_previous()
