@@ -1,7 +1,7 @@
 {
-  "lastChecked": "2026-06-21 02:00:02",
-  "totalDevices": 108,
-  "totalOffline": 7,
+  "lastChecked": "2026-06-21 02:52:17",
+  "totalDevices": 109,
+  "totalOffline": 8,
   "totalOnline": 101,
   "devices": [
     {
@@ -10,7 +10,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2025-12-14 21:05:01",
-      "hoursSinceUpdate": 4516.9,
+      "hoursSinceUpdate": 4517.8,
       "isOffline": true
     },
     {
@@ -19,7 +19,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-05-19 04:07:34",
-      "hoursSinceUpdate": 789.9,
+      "hoursSinceUpdate": 790.7,
       "isOffline": true
     },
     {
@@ -28,7 +28,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "STATIC",
       "lastUpdate": "2026-06-16 15:49:12",
-      "hoursSinceUpdate": 106.2,
+      "hoursSinceUpdate": 107.1,
       "isOffline": true
     },
     {
@@ -37,7 +37,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-17 06:45:13",
-      "hoursSinceUpdate": 91.2,
+      "hoursSinceUpdate": 92.1,
       "isOffline": true
     },
     {
@@ -46,7 +46,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-17 09:57:25",
-      "hoursSinceUpdate": 88.0,
+      "hoursSinceUpdate": 88.9,
       "isOffline": true
     },
     {
@@ -55,7 +55,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-19 09:50:53",
-      "hoursSinceUpdate": 40.2,
+      "hoursSinceUpdate": 41.0,
       "isOffline": true
     },
     {
@@ -64,7 +64,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "STATIC",
       "lastUpdate": "2026-06-19 15:27:16",
-      "hoursSinceUpdate": 34.5,
+      "hoursSinceUpdate": 35.4,
       "isOffline": true
     },
     {
@@ -73,8 +73,8 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-20 14:43:41",
-      "hoursSinceUpdate": 11.3,
-      "isOffline": false
+      "hoursSinceUpdate": 12.1,
+      "isOffline": true
     },
     {
       "deviceName": "DT030-0111",
@@ -82,7 +82,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-20 15:47:58",
-      "hoursSinceUpdate": 10.2,
+      "hoursSinceUpdate": 11.1,
       "isOffline": false
     },
     {
@@ -91,7 +91,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "STATIC",
       "lastUpdate": "2026-06-20 16:55:00",
-      "hoursSinceUpdate": 9.1,
+      "hoursSinceUpdate": 10.0,
       "isOffline": false
     },
     {
@@ -100,7 +100,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-20 17:21:35",
-      "hoursSinceUpdate": 8.6,
+      "hoursSinceUpdate": 9.5,
       "isOffline": false
     },
     {
@@ -109,7 +109,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-20 20:07:01",
-      "hoursSinceUpdate": 5.9,
+      "hoursSinceUpdate": 6.8,
       "isOffline": false
     },
     {
@@ -118,7 +118,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "STATIC",
       "lastUpdate": "2026-06-20 20:58:52",
-      "hoursSinceUpdate": 5.0,
+      "hoursSinceUpdate": 5.9,
       "isOffline": false
     },
     {
@@ -127,7 +127,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-21 01:43:18",
-      "hoursSinceUpdate": 0.3,
+      "hoursSinceUpdate": 1.1,
       "isOffline": false
     },
     {
@@ -136,7 +136,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-21 01:51:50",
-      "hoursSinceUpdate": 0.1,
+      "hoursSinceUpdate": 1.0,
       "isOffline": false
     },
     {
@@ -145,7 +145,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-21 01:57:16",
-      "hoursSinceUpdate": 0.0,
+      "hoursSinceUpdate": 0.9,
       "isOffline": false
     },
     {
@@ -154,7 +154,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-21 02:40:15",
-      "hoursSinceUpdate": -0.7,
+      "hoursSinceUpdate": 0.2,
       "isOffline": false
     },
     {
@@ -163,7 +163,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "STATIC",
       "lastUpdate": "2026-06-21 04:49:24",
-      "hoursSinceUpdate": -2.8,
+      "hoursSinceUpdate": -2.0,
       "isOffline": false
     },
     {
@@ -172,34 +172,16 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-21 04:55:23",
-      "hoursSinceUpdate": -2.9,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0148",
-      "imei": "862798051919955",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 05:14:02",
-      "hoursSinceUpdate": -3.2,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0127",
-      "imei": "862798051923825",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 05:26:24",
-      "hoursSinceUpdate": -3.4,
+      "hoursSinceUpdate": -2.1,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0144",
       "imei": "862798051932263",
       "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
+      "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-21 06:31:08",
-      "hoursSinceUpdate": -4.5,
+      "hoursSinceUpdate": -3.6,
       "isOffline": false
     },
     {
@@ -208,7 +190,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-21 06:43:02",
-      "hoursSinceUpdate": -4.7,
+      "hoursSinceUpdate": -3.8,
       "isOffline": false
     },
     {
@@ -217,7 +199,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "STATIC",
       "lastUpdate": "2026-06-21 07:21:37",
-      "hoursSinceUpdate": -5.4,
+      "hoursSinceUpdate": -4.5,
       "isOffline": false
     },
     {
@@ -226,7 +208,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "STATIC",
       "lastUpdate": "2026-06-21 07:21:32",
-      "hoursSinceUpdate": -5.4,
+      "hoursSinceUpdate": -4.5,
       "isOffline": false
     },
     {
@@ -235,7 +217,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-21 07:24:33",
-      "hoursSinceUpdate": -5.4,
+      "hoursSinceUpdate": -4.5,
       "isOffline": false
     },
     {
@@ -244,16 +226,16 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-21 07:39:25",
-      "hoursSinceUpdate": -5.7,
+      "hoursSinceUpdate": -4.8,
       "isOffline": false
     },
     {
       "deviceName": "DT030-0118",
       "imei": "862798051920128",
       "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
+      "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-21 07:41:37",
-      "hoursSinceUpdate": -5.7,
+      "hoursSinceUpdate": -4.8,
       "isOffline": false
     },
     {
@@ -262,7 +244,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "STATIC",
       "lastUpdate": "2026-06-21 07:41:29",
-      "hoursSinceUpdate": -5.7,
+      "hoursSinceUpdate": -4.8,
       "isOffline": false
     },
     {
@@ -271,7 +253,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "STATIC",
       "lastUpdate": "2026-06-21 07:46:44",
-      "hoursSinceUpdate": -5.8,
+      "hoursSinceUpdate": -4.9,
       "isOffline": false
     },
     {
@@ -280,79 +262,7 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "STATIC",
       "lastUpdate": "2026-06-21 08:13:26",
-      "hoursSinceUpdate": -6.2,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0210",
-      "imei": "862798051921332",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:20:24",
-      "hoursSinceUpdate": -6.3,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0157",
-      "imei": "862798051932107",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:25:38",
-      "hoursSinceUpdate": -6.4,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0277",
-      "imei": "862798052240880",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:27:43",
-      "hoursSinceUpdate": -6.5,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0166",
-      "imei": "864993060308989",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 08:29:27",
-      "hoursSinceUpdate": -6.5,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0179",
-      "imei": "864993060307627",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:31:08",
-      "hoursSinceUpdate": -6.5,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0122",
-      "imei": "862798051932651",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:28:24",
-      "hoursSinceUpdate": -6.5,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0151",
-      "imei": "862798051919823",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:28:11",
-      "hoursSinceUpdate": -6.5,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0170",
-      "imei": "862798051927933",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:27:17",
-      "hoursSinceUpdate": -6.5,
+      "hoursSinceUpdate": -5.4,
       "isOffline": false
     },
     {
@@ -361,6 +271,87 @@
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
       "lastUpdate": "2026-06-21 08:29:16",
+      "hoursSinceUpdate": -5.6,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0109",
+      "imei": "864993060310597",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 08:54:03",
+      "hoursSinceUpdate": -6.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0204",
+      "imei": "864993060309177",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 08:56:20",
+      "hoursSinceUpdate": -6.1,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0275",
+      "imei": "862798052240385",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:19:49",
+      "hoursSinceUpdate": -6.5,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0113",
+      "imei": "862798051924864",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:23:05",
+      "hoursSinceUpdate": -6.5,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0106",
+      "imei": "862798051931869",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:24:22",
+      "hoursSinceUpdate": -6.5,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0122",
+      "imei": "862798051932651",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:24:49",
+      "hoursSinceUpdate": -6.5,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0148",
+      "imei": "862798051919955",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:20:16",
+      "hoursSinceUpdate": -6.5,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0151",
+      "imei": "862798051919823",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:24:44",
+      "hoursSinceUpdate": -6.5,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0210",
+      "imei": "862798051921332",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:24:18",
       "hoursSinceUpdate": -6.5,
       "isOffline": false
     },
@@ -369,206 +360,8 @@
       "imei": "864993060311462",
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:33:26",
+      "lastUpdate": "2026-06-21 09:30:26",
       "hoursSinceUpdate": -6.6,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0195",
-      "imei": "864993060309144",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:38:05",
-      "hoursSinceUpdate": -6.6,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0276",
-      "imei": "862798052240625",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:38:10",
-      "hoursSinceUpdate": -6.6,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0280",
-      "imei": "862798052241078",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:33:31",
-      "hoursSinceUpdate": -6.6,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0275",
-      "imei": "862798052240385",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:36:23",
-      "hoursSinceUpdate": -6.6,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0217",
-      "imei": "862798051921902",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:37:30",
-      "hoursSinceUpdate": -6.6,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0230",
-      "imei": "862798051931752",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:36:13",
-      "hoursSinceUpdate": -6.6,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT040-0015",
-      "imei": "862798051918999",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:36:05",
-      "hoursSinceUpdate": -6.6,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0133",
-      "imei": "865478070065315",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 08:42:04",
-      "hoursSinceUpdate": -6.7,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0153",
-      "imei": "865478070068269",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:40:06",
-      "hoursSinceUpdate": -6.7,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0176",
-      "imei": "864993060309003",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:39:25",
-      "hoursSinceUpdate": -6.7,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0124",
-      "imei": "862798051920581",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:41:29",
-      "hoursSinceUpdate": -6.7,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0180",
-      "imei": "862798051920680",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:41:24",
-      "hoursSinceUpdate": -6.7,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0209",
-      "imei": "862798051919799",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:43:18",
-      "hoursSinceUpdate": -6.7,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT040-0004",
-      "imei": "862798051930747",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:42:42",
-      "hoursSinceUpdate": -6.7,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0089",
-      "imei": "864993060622298",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:46:27",
-      "hoursSinceUpdate": -6.8,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT040-0026",
-      "imei": "864993060623833",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:46:02",
-      "hoursSinceUpdate": -6.8,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0077",
-      "imei": "864993060309748",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:50:52",
-      "hoursSinceUpdate": -6.8,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0164",
-      "imei": "864993060308906",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:45:50",
-      "hoursSinceUpdate": -6.8,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0161",
-      "imei": "862798051933071",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:46:59",
-      "hoursSinceUpdate": -6.8,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0099",
-      "imei": "862798051924252",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 08:49:38",
-      "hoursSinceUpdate": -6.8,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0120",
-      "imei": "862798051934608",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:46:42",
-      "hoursSinceUpdate": -6.8,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0142",
-      "imei": "862798051933683",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:45:32",
-      "hoursSinceUpdate": -6.8,
       "isOffline": false
     },
     {
@@ -576,8 +369,62 @@
       "imei": "862798051924096",
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:46:31",
-      "hoursSinceUpdate": -6.8,
+      "lastUpdate": "2026-06-21 09:30:12",
+      "hoursSinceUpdate": -6.6,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0173",
+      "imei": "862798051923692",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:30:05",
+      "hoursSinceUpdate": -6.6,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0180",
+      "imei": "862798051920680",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:30:39",
+      "hoursSinceUpdate": -6.6,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0096",
+      "imei": "864993060311694",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "STATIC",
+      "lastUpdate": "2026-06-21 09:33:29",
+      "hoursSinceUpdate": -6.7,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0150",
+      "imei": "864993060310647",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:32:26",
+      "hoursSinceUpdate": -6.7,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0277",
+      "imei": "862798052240880",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:33:17",
+      "hoursSinceUpdate": -6.7,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0166",
+      "imei": "864993060308989",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:32:00",
+      "hoursSinceUpdate": -6.7,
       "isOffline": false
     },
     {
@@ -585,34 +432,106 @@
       "imei": "862798051919724",
       "groupName": "DT RTP FIX",
       "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 08:49:48",
-      "hoursSinceUpdate": -6.8,
+      "lastUpdate": "2026-06-21 09:36:41",
+      "hoursSinceUpdate": -6.7,
       "isOffline": false
     },
     {
-      "deviceName": "DT040-0012",
-      "imei": "862798051918924",
+      "deviceName": "DT030-0282",
+      "imei": "865478070112315",
       "groupName": "DT RTP FIX",
       "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:50:59",
+      "lastUpdate": "2026-06-21 09:42:03",
       "hoursSinceUpdate": -6.8,
       "isOffline": false
     },
     {
-      "deviceName": "DT040-0025",
-      "imei": "864993060311116",
+      "deviceName": "DT030-0195",
+      "imei": "864993060309144",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:38:32",
+      "hoursSinceUpdate": -6.8,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0176",
+      "imei": "864993060309003",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:39:54",
+      "hoursSinceUpdate": -6.8,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0184",
+      "imei": "864993060312239",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "STATIC",
+      "lastUpdate": "2026-06-21 09:41:56",
+      "hoursSinceUpdate": -6.8,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0147",
+      "imei": "862798051918833",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:38:50",
+      "hoursSinceUpdate": -6.8,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0170",
+      "imei": "862798051927933",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:37:33",
+      "hoursSinceUpdate": -6.8,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0217",
+      "imei": "862798051921902",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:39:39",
+      "hoursSinceUpdate": -6.8,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0230",
+      "imei": "862798051931752",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:42:19",
+      "hoursSinceUpdate": -6.8,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT040-0015",
+      "imei": "862798051918999",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "OFFLINE",
+      "lastUpdate": "2026-06-21 09:41:58",
+      "hoursSinceUpdate": -6.8,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0133",
+      "imei": "865478070065315",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:55:40",
+      "lastUpdate": "2026-06-21 09:48:58",
       "hoursSinceUpdate": -6.9,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0139",
-      "imei": "862798051745681",
+      "deviceName": "DT030-0276",
+      "imei": "862798052240625",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:54:32",
+      "lastUpdate": "2026-06-21 09:46:38",
       "hoursSinceUpdate": -6.9,
       "isOffline": false
     },
@@ -620,71 +539,62 @@
       "deviceName": "DT030-0278",
       "imei": "862798052240591",
       "groupName": "DT RTP FIX",
-      "statusRaw": "OFFLINE",
-      "lastUpdate": "2026-06-21 08:51:10",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:46:52",
       "hoursSinceUpdate": -6.9,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0284",
-      "imei": "862798052237878",
+      "deviceName": "DT040-0029",
+      "imei": "864993060310654",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:45:46",
+      "hoursSinceUpdate": -6.9,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0164",
+      "imei": "864993060308906",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:49:00",
+      "hoursSinceUpdate": -6.9,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0075",
+      "imei": "864993060310712",
       "groupName": "DT RTP FIX",
       "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 08:52:44",
+      "lastUpdate": "2026-06-21 09:44:21",
       "hoursSinceUpdate": -6.9,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0279",
-      "imei": "862798052238009",
+      "deviceName": "DT030-0157",
+      "imei": "862798051932107",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:53:39",
+      "lastUpdate": "2026-06-21 09:47:37",
       "hoursSinceUpdate": -6.9,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0109",
-      "imei": "864993060310597",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 08:54:03",
-      "hoursSinceUpdate": -6.9,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0121",
-      "imei": "864993060308070",
+      "deviceName": "DT030-0185",
+      "imei": "862798051934202",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:56:57",
+      "lastUpdate": "2026-06-21 09:47:47",
       "hoursSinceUpdate": -6.9,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0204",
-      "imei": "864993060309177",
+      "deviceName": "DT030-0201",
+      "imei": "862798051935175",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:56:20",
-      "hoursSinceUpdate": -6.9,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0178",
-      "imei": "862798051924419",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:55:53",
-      "hoursSinceUpdate": -6.9,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0199",
-      "imei": "862798051935316",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:53:45",
+      "lastUpdate": "2026-06-21 09:48:13",
       "hoursSinceUpdate": -6.9,
       "isOffline": false
     },
@@ -693,16 +603,34 @@
       "imei": "862798051929236",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:54:21",
+      "lastUpdate": "2026-06-21 09:49:12",
       "hoursSinceUpdate": -6.9,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0282",
-      "imei": "865478070112315",
+      "deviceName": "DT030-0285",
+      "imei": "862798051921225",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:34",
+      "lastUpdate": "2026-06-21 09:49:16",
+      "hoursSinceUpdate": -6.9,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0281",
+      "imei": "865478070338191",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:51:50",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0153",
+      "imei": "865478070068269",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:50:50",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -711,7 +639,16 @@
       "imei": "865478070112570",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:14",
+      "lastUpdate": "2026-06-21 09:52:09",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0089",
+      "imei": "864993060622298",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:52:05",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -719,17 +656,35 @@
       "deviceName": "DT030-0159",
       "imei": "864993060624013",
       "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:47",
+      "statusRaw": "STATIC",
+      "lastUpdate": "2026-06-21 09:52:05",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0096",
-      "imei": "864993060311694",
+      "deviceName": "DT040-0026",
+      "imei": "864993060623833",
       "groupName": "DT RTP FIX",
       "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 08:59:56",
+      "lastUpdate": "2026-06-21 09:52:03",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT040-0025",
+      "imei": "864993060311116",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:52:14",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0139",
+      "imei": "862798051745681",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:49:53",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -737,8 +692,8 @@
       "deviceName": "DT040-0001",
       "imei": "864993060310621",
       "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 08:59:18",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:52:07",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -747,7 +702,7 @@
       "imei": "864993060310415",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:53",
+      "lastUpdate": "2026-06-21 09:52:07",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -756,7 +711,7 @@
       "imei": "864993060309128",
       "groupName": "DT RTP FIX",
       "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 08:59:13",
+      "lastUpdate": "2026-06-21 09:52:13",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -765,16 +720,7 @@
       "imei": "864993060311280",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:24",
-      "hoursSinceUpdate": -7.0,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0150",
-      "imei": "864993060310647",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:25",
+      "lastUpdate": "2026-06-21 09:51:58",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -783,16 +729,34 @@
       "imei": "862798052240476",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:52",
+      "lastUpdate": "2026-06-21 09:52:03",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT040-0029",
-      "imei": "864993060310654",
+      "deviceName": "DT030-0280",
+      "imei": "862798052241078",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:44",
+      "lastUpdate": "2026-06-21 09:51:28",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0284",
+      "imei": "862798052237878",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:50:21",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0279",
+      "imei": "862798052238009",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:52:10",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -801,7 +765,7 @@
       "imei": "864993060311124",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:25",
+      "lastUpdate": "2026-06-21 09:51:53",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -809,17 +773,17 @@
       "deviceName": "DT030-0134",
       "imei": "864993060310951",
       "groupName": "DT RTP FIX",
-      "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 08:59:53",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:52:11",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0184",
-      "imei": "864993060312239",
+      "deviceName": "DT030-0121",
+      "imei": "864993060308070",
       "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:55",
+      "statusRaw": "STATIC",
+      "lastUpdate": "2026-06-21 09:51:15",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -828,7 +792,7 @@
       "imei": "864993060310779",
       "groupName": "DT RTP FIX",
       "statusRaw": "STATIC",
-      "lastUpdate": "2026-06-21 08:59:34",
+      "lastUpdate": "2026-06-21 09:51:34",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -837,25 +801,52 @@
       "imei": "864993060312023",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:09",
+      "lastUpdate": "2026-06-21 09:51:10",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0113",
-      "imei": "862798051924864",
+      "deviceName": "DT030-0077",
+      "imei": "864993060309748",
       "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:39",
+      "statusRaw": "STATIC",
+      "lastUpdate": "2026-06-21 09:51:52",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0075",
-      "imei": "864993060310712",
+      "deviceName": "DT030-0179",
+      "imei": "864993060307627",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:09",
+      "lastUpdate": "2026-06-21 09:52:09",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0124",
+      "imei": "862798051920581",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:50:51",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0161",
+      "imei": "862798051933071",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:52:06",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0127",
+      "imei": "862798051923825",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:49:54",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -864,7 +855,7 @@
       "imei": "862798051930259",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:58:19",
+      "lastUpdate": "2026-06-21 09:52:07",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -873,16 +864,16 @@
       "imei": "862798051926190",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:57",
+      "lastUpdate": "2026-06-21 09:52:12",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0106",
-      "imei": "862798051931869",
+      "deviceName": "DT030-0099",
+      "imei": "862798051924252",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:00:01",
+      "lastUpdate": "2026-06-21 09:51:03",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -891,7 +882,16 @@
       "imei": "862798051935639",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:53",
+      "lastUpdate": "2026-06-21 09:52:10",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT030-0120",
+      "imei": "862798051934608",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:52:11",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -900,7 +900,7 @@
       "imei": "862798051923775",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:48",
+      "lastUpdate": "2026-06-21 09:52:03",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -909,34 +909,25 @@
       "imei": "862798051923676",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:53",
+      "lastUpdate": "2026-06-21 09:52:13",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0147",
-      "imei": "862798051918833",
+      "deviceName": "DT030-0142",
+      "imei": "862798051933683",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:56",
+      "lastUpdate": "2026-06-21 09:52:09",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0173",
-      "imei": "862798051923692",
+      "deviceName": "DT030-0178",
+      "imei": "862798051924419",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:42",
-      "hoursSinceUpdate": -7.0,
-      "isOffline": false
-    },
-    {
-      "deviceName": "DT030-0185",
-      "imei": "862798051934202",
-      "groupName": "DT RTP FIX",
-      "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:58",
+      "lastUpdate": "2026-06-21 09:52:13",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -945,25 +936,43 @@
       "imei": "862798051924294",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:27",
+      "lastUpdate": "2026-06-21 09:51:01",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0201",
-      "imei": "862798051935175",
+      "deviceName": "DT030-0199",
+      "imei": "862798051935316",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 09:00:00",
+      "lastUpdate": "2026-06-21 09:50:59",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
     {
-      "deviceName": "DT030-0285",
-      "imei": "862798051921225",
+      "deviceName": "DT030-0209",
+      "imei": "862798051919799",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:59",
+      "lastUpdate": "2026-06-21 09:52:12",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT040-0004",
+      "imei": "862798051930747",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:51:40",
+      "hoursSinceUpdate": -7.0,
+      "isOffline": false
+    },
+    {
+      "deviceName": "DT040-0012",
+      "imei": "862798051918924",
+      "groupName": "DT RTP FIX",
+      "statusRaw": "MOVE",
+      "lastUpdate": "2026-06-21 09:50:21",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     },
@@ -972,7 +981,7 @@
       "imei": "862798051924351",
       "groupName": "DT RTP FIX",
       "statusRaw": "MOVE",
-      "lastUpdate": "2026-06-21 08:59:33",
+      "lastUpdate": "2026-06-21 09:52:12",
       "hoursSinceUpdate": -7.0,
       "isOffline": false
     }
