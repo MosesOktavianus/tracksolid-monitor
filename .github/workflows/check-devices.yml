@@ -31,6 +31,19 @@ jobs:
         env:
           TSP_ACCOUNT: ${{ secrets.TSP_ACCOUNT }}
           TSP_PASSWORD: ${{ secrets.TSP_PASSWORD }}
+          TSP_LABEL_1: ${{ secrets.TSP_LABEL_1 }}
+          TSP_ACCOUNT_2: ${{ secrets.TSP_ACCOUNT_2 }}
+          TSP_PASSWORD_2: ${{ secrets.TSP_PASSWORD_2 }}
+          TSP_LABEL_2: ${{ secrets.TSP_LABEL_2 }}
+          TSP_ACCOUNT_3: ${{ secrets.TSP_ACCOUNT_3 }}
+          TSP_PASSWORD_3: ${{ secrets.TSP_PASSWORD_3 }}
+          TSP_LABEL_3: ${{ secrets.TSP_LABEL_3 }}
+          TSP_ACCOUNT_4: ${{ secrets.TSP_ACCOUNT_4 }}
+          TSP_PASSWORD_4: ${{ secrets.TSP_PASSWORD_4 }}
+          TSP_LABEL_4: ${{ secrets.TSP_LABEL_4 }}
+          TSP_ACCOUNT_5: ${{ secrets.TSP_ACCOUNT_5 }}
+          TSP_PASSWORD_5: ${{ secrets.TSP_PASSWORD_5 }}
+          TSP_LABEL_5: ${{ secrets.TSP_LABEL_5 }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
