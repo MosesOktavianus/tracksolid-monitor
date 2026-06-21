@@ -102,12 +102,6 @@ def login_and_fetch_devices(playwright) -> list:
     page.wait_for_timeout(5000)
     print("Login berhasil.")
 
-    token_check = page.evaluate("() => localStorage.getItem('token')")
-    if token_check:
-        print(f"Token terdeteksi (panjang: {len(token_check)} karakter, awalan: {token_check[:15]}...)")
-    else:
-        print("PERINGATAN: token di localStorage kosong/null!")
-
     # Coba ambil userId dari localStorage (biasanya tersimpan setelah login,
     # dipakai UI untuk semua request berikutnya termasuk queryEquipmentList).
     user_id = page.evaluate("""() => {
@@ -122,72 +116,77 @@ def login_and_fetch_devices(playwright) -> list:
     }""")
     print(f"userId terdeteksi: {user_id}")
 
+    # Coba ambil orgId dari localStorage juga -- field ini wajib diisi
+    # (bukan string kosong) supaya server tidak menolak dengan IllegalParameter.
+    org_id = page.evaluate("""() => {
+        try {
+            const userInfo = localStorage.getItem('userInfo');
+            if (userInfo) {
+                const parsed = JSON.parse(userInfo);
+                return parsed.orgId || parsed.fullParentId || null;
+            }
+        } catch (e) {}
+        return null;
+    }""")
+    print(f"orgId terdeteksi: {org_id}")
+
+    # Fallback: kalau orgId tidak ketemu otomatis dari localStorage, pakai nilai
+    # yang sudah dikonfirmasi benar dari DevTools (akun ini spesifik milik 1 organisasi).
+    if not org_id:
+        org_id = "b461e9bed2924341ae8b7c6e1b5ad0f4"
+        print(f"orgId pakai fallback hardcoded: {org_id}")
+
     # Panggil endpoint device list LANGSUNG dari dalam browser (pakai fetch),
     # supaya semua header/auth/cookie otomatis persis seperti request asli.
-    all_devices = []
-    start_row = 0
-    page_size = 100  # nilai ini terbukti valid dari payload asli (pageSize: 100)
+    # Payload ini disusun persis sama dengan request asli yang terbukti sukses
+    # (diambil dari DevTools Network tab saat login manual).
+    payload = {
+        "imei": "",
+        "startRow": "0",
+        "userType": 8,
+        "userId": int(user_id) if user_id else "",
+        "orgId": org_id or "",
+        "siftType": "",
+        "sortType": "",
+        "sortRule": "",
+        "isNewMcType": "0",
+        "videoEntry": "",
+        "type": "NORMAL",
+        "searchStatus": "ALL",
+    }
 
-    while True:
-        payload = {
-            "imei": "",
-            "startRow": str(start_row),
-            "userType": 8,
-            "userId": int(user_id) if user_id else "",
-            "isNewMcType": "0",
-            "orgId": "",
-            "pageSize": page_size,
-            "searchStatus": "",
-            "siftType": "",
-            "sortRule": "",
-            "sortType": "",
-            "type": "NORMAL",
-            "videoEntry": "",
-        }
-
-        result = page.evaluate(
-            """async (payload) => {
-                const token = localStorage.getItem('token');
-                const resp = await fetch('/v3/new/newEquipment/queryEquipmentList', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json;charset=UTF-8',
-                        'Accept': 'application/json, text/plain, */*',
-                        'Authorization': token,
-                        'Must': 'true',
-                    },
-                    body: JSON.stringify(payload),
-                });
-                const status = resp.status;
-                const text = await resp.text();
-                return { status, text };
-            }""",
-            payload,
-        )
-
-        if result["status"] != 200:
-            browser.close()
-            raise SystemExit(f"Gagal ambil device list. Status: {result['status']}, Body: {result['text'][:500]}")
-
-        print(f"Halaman startRow={start_row}: response (300 char pertama): {result['text'][:300]}")
-
-        data = json.loads(result["text"])
-        if not data.get("ok", False):
-            browser.close()
-            raise SystemExit(f"Gagal ambil device list. Response: {data}")
-
-        batch = data.get("data", [])
-        all_devices.extend(batch)
-        print(f"Halaman startRow={start_row}: dapat {len(batch)} device (total sejauh ini: {len(all_devices)})")
-
-        if len(batch) < page_size:
-            break  # halaman terakhir
-        start_row += page_size
-
-        if start_row > 2000:  # safety guard, jangan sampai infinite loop
-            break
+    result = page.evaluate(
+        """async (payload) => {
+            const token = localStorage.getItem('token');
+            const resp = await fetch('/v3/new/newEquipment/queryEquipmentList', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Accept': 'application/json, text/plain, */*',
+                    'Authorization': token,
+                    'Must': 'true',
+                },
+                body: JSON.stringify(payload),
+            });
+            const status = resp.status;
+            const text = await resp.text();
+            return { status, text };
+        }""",
+        payload,
+    )
 
     browser.close()
+
+    if result["status"] != 200:
+        raise SystemExit(f"Gagal ambil device list. Status: {result['status']}, Body: {result['text'][:500]}")
+
+    print(f"Device list raw response (500 char pertama): {result['text'][:500]}")
+
+    data = json.loads(result["text"])
+    if not data.get("ok", False):
+        raise SystemExit(f"Gagal ambil device list. Response: {data}")
+
+    all_devices = data.get("data", [])
     print(f"Total device terkumpul: {len(all_devices)}")
     return all_devices
 
