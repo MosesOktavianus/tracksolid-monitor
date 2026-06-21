@@ -123,12 +123,12 @@ def login_and_fetch_devices(playwright) -> list:
             const userInfo = localStorage.getItem('userInfo');
             if (userInfo) {
                 const parsed = JSON.parse(userInfo);
-                return parsed.orgId || parsed.fullParentId || null;
+                return parsed.orgId || null;
             }
         } catch (e) {}
         return null;
     }""")
-    print(f"orgId terdeteksi: {org_id}")
+    print(f"orgId terdeteksi dari localStorage: {org_id}")
 
     # Fallback: kalau orgId tidak ketemu otomatis dari localStorage, pakai nilai
     # yang sudah dikonfirmasi benar dari DevTools (akun ini spesifik milik 1 organisasi).
