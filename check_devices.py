@@ -157,17 +157,22 @@ def login_and_fetch_devices(playwright, account: str, password: str, label: str)
         account_list_item = page.locator("text=/Stock\\d+\\/Total\\d+/").first
         element_count = account_list_item.count()
         if element_count > 0:
-            account_list_item.scroll_into_view_if_needed(timeout=5000)
             try:
-                account_list_item.click(timeout=5000)
+                account_list_item.scroll_into_view_if_needed(timeout=3000)
+                account_list_item.click(timeout=3000)
+                page.wait_for_timeout(3000)
+                print(f"[{label}] Berhasil klik node induk organisasi di Account List.")
             except Exception:
-                account_list_item.click(timeout=5000, force=True)
-            page.wait_for_timeout(3000)
-            print(f"[{label}] Berhasil klik node induk organisasi di Account List.")
+                try:
+                    account_list_item.click(timeout=3000, force=True)
+                    page.wait_for_timeout(3000)
+                    print(f"[{label}] Berhasil force-klik node induk organisasi di Account List.")
+                except Exception as e2:
+                    print(f"[{label}] Elemen Account List ada tapi tidak bisa diklik ({e2}), lanjut tanpa klik.")
         else:
             print(f"[{label}] Tidak ada elemen Account List (Stock/Total) -- kemungkinan akun ini cuma punya 1 grup tanpa hierarki, skip klik.")
     except Exception as e:
-        print(f"[{label}] PERINGATAN: gagal klik node Account List ({e}), lanjut tanpa klik eksplisit.")
+        print(f"[{label}] PERINGATAN: gagal cek/klik node Account List ({e}), lanjut tanpa klik eksplisit.")
 
     page.wait_for_timeout(5000)
     print(f"[{label}] Login berhasil.")
@@ -482,9 +487,13 @@ def main():
                     playwright, acc["account"], acc["password"], acc["label"]
                 )
                 all_raw_devices.extend(devices)
-            except Exception as e:
-                # Satu akun gagal tidak boleh menggagalkan semuanya --
-                # log error-nya, lanjut ke akun berikutnya.
+            except BaseException as e:
+                # PENTING: pakai BaseException, bukan Exception biasa, karena
+                # SystemExit (dipakai di banyak tempat untuk gagal-cepat di dalam
+                # login_and_fetch_devices) adalah subclass BaseException, BUKAN
+                # subclass Exception -- kalau pakai "except Exception" di sini,
+                # SystemExit dari 1 akun akan tetap menghentikan SELURUH script,
+                # bukan cuma skip ke akun berikutnya seperti yang diharapkan.
                 print(f"[{acc['label']}] GAGAL: {e}")
                 continue
 
