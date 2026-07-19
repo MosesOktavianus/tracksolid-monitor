@@ -1,0 +1,62 @@
+name: TrackSolid Device Check
+
+on:
+  schedule:
+    - cron: "0 * * * *"        # tiap jam; sesuaikan sesuai kebutuhan
+  workflow_dispatch:            # bisa dijalankan manual dari tab Actions
+
+permissions:
+  contents: write
+
+concurrency:
+  group: device-check
+  cancel-in-progress: false
+
+jobs:
+  check-devices:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install playwright
+
+      - name: Install Playwright browser
+        run: playwright install --with-deps chromium
+
+      - name: Run device check
+        env:
+          TS_ACCOUNTS: ${{ secrets.TS_ACCOUNTS }}
+        run: python check_devices.py
+
+      - name: Upload debug artifacts if failed
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-screenshots
+          path: debug/
+          if-no-files-found: ignore
+
+      - name: Commit and push results
+        if: always()            # commit walau step check exit 1 (data parsial)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Guard: hanya add file yang benar-benar ada
+          [ -f docs/devices.json ] && git add docs/devices.json
+          [ -f docs/devices_previous.json ] && git add docs/devices_previous.json
+
+          # Guard: jangan commit kalau tidak ada perubahan
+          if git diff --staged --quiet; then
+            echo "Tidak ada perubahan data — skip commit."
+          else
+            git commit -m "Update device data [skip ci]"
+            git push
+          fi

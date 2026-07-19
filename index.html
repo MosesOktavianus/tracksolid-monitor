@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrackSolid Monitor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#10151E; --panel:#171E2A; --panel2:#1D2634; --line:#26303F;
+    --ink:#E8EDF5; --muted:#7C8899; --accent:#5AA7FF;
+    --ok:#34D399; --warn:#F5A524; --bad:#F0655A;
+    --r:10px;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--bg);color:var(--ink);font-family:'Archivo',sans-serif;min-height:100vh}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 20px 64px}
+
+  header{display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px;justify-content:space-between;margin-bottom:22px}
+  .brand h1{font-weight:800;font-size:22px;letter-spacing:.02em}
+  .brand .sub{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);margin-top:4px}
+  .ratio{font-family:'IBM Plex Mono',monospace;text-align:right}
+  .ratio .big{font-size:34px;font-weight:600}
+  .ratio .big .on{color:var(--ok)}
+  .ratio .lbl{font-size:11px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+  .pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);margin-right:6px;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  @media (prefers-reduced-motion:reduce){.pulse{animation:none}}
+
+  /* Signature: fleet strip — satu segmen per device */
+  .strip{display:flex;gap:3px;height:26px;margin-bottom:22px}
+  .seg{flex:1;border-radius:3px;background:var(--panel2);cursor:pointer;transition:transform .12s;min-width:6px}
+  .seg.on{background:var(--ok)} .seg.off{background:var(--warn)}
+  .seg:hover{transform:translateY(-3px)}
+
+  .controls{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+  .search{flex:1;min-width:220px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+    padding:10px 14px;color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:13px}
+  .search:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .tabs{display:flex;gap:6px}
+  .tab{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:10px 14px;
+    color:var(--muted);font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+  .tab.active{color:var(--ink);border-color:var(--accent)}
+  .tab:focus-visible{outline:2px solid var(--accent)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;scroll-margin-top:16px}
+  .card .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .card .name{font-weight:700;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .badge{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px;white-space:nowrap}
+  .badge.on{color:var(--ok);background:rgba(52,211,153,.12)}
+  .badge.off{color:var(--warn);background:rgba(245,165,36,.12)}
+  .meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);margin-top:10px;display:grid;gap:4px}
+  .meta b{color:var(--ink);font-weight:500}
+
+  .note{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted)}
+  .note.err{border-color:var(--bad);color:var(--bad)}
+  .failwarn{margin:0 0 16px;padding:10px 14px;border:1px solid var(--warn);border-radius:var(--r);
+    color:var(--warn);font-family:'IBM Plex Mono',monospace;font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <h1>TrackSolid Monitor</h1>
+      <div class="sub" id="updated">memuat…</div>
+    </div>
+    <div class="ratio">
+      <div class="big"><span class="pulse"></span><span class="on" id="nOn">–</span> / <span id="nTot">–</span></div>
+      <div class="lbl">online / total device</div>
+    </div>
+  </header>
+
+  <div id="failwarn"></div>
+  <div class="strip" id="strip" aria-label="Ringkasan status seluruh device"></div>
+
+  <div class="controls">
+    <input class="search" id="q" type="search" placeholder="Cari nama atau IMEI…" aria-label="Cari device">
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-f="all">Semua</button>
+      <button class="tab" data-f="on">Online</button>
+      <button class="tab" data-f="off">Offline</button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div id="empty"></div>
+</div>
+
+<script>
+let DATA=null, FILTER='all', Q='';
+
+function relTime(iso){
+  if(!iso) return '–';
+  const d=new Date(iso); if(isNaN(d)) return iso;
+  const m=Math.floor((Date.now()-d)/60000);
+  if(m<1) return 'baru saja';
+  if(m<60) return m+' menit lalu';
+  const h=Math.floor(m/60); if(h<24) return h+' jam lalu';
+  return Math.floor(h/24)+' hari lalu';
+}
+
+function render(){
+  if(!DATA) return;
+  const devs=DATA.devices.filter(d=>{
+    if(FILTER==='on'&&!d.online) return false;
+    if(FILTER==='off'&&d.online) return false;
+    const q=Q.toLowerCase();
+    return !q || d.name.toLowerCase().includes(q) || d.imei.includes(q);
+  });
+
+  document.getElementById('nOn').textContent=DATA.online;
+  document.getElementById('nTot').textContent=DATA.total;
+  document.getElementById('updated').textContent=
+    'diperbarui '+relTime(DATA.generated_at)+' · '+new Date(DATA.generated_at).toLocaleString('id-ID');
+
+  const fw=document.getElementById('failwarn');
+  fw.innerHTML = DATA.accounts_failed?.length
+    ? `<div class="failwarn">⚠ Akun gagal dicek: ${DATA.accounts_failed.join(', ')} — data mungkin tidak lengkap.</div>` : '';
+
+  document.getElementById('strip').innerHTML =
+    DATA.devices.map((d,i)=>`<div class="seg ${d.online?'on':'off'}" title="${d.name}" onclick="jump(${i})"></div>`).join('');
+
+  document.getElementById('grid').innerHTML = devs.map(d=>`
+    <div class="card" id="dev-${DATA.devices.indexOf(d)}">
+      <div class="top">
+        <div class="name">${d.name}</div>
+        <span class="badge ${d.online?'on':'off'}">${d.online?'ONLINE':'OFFLINE'}</span>
+      </div>
+      <div class="meta">
+        <div>IMEI <b>${d.imei||'–'}</b></div>
+        <div>Terakhir aktif <b>${relTime(d.last_seen)}</b></div>
+        <div>Akun <b>${d.account}</b></div>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('empty').innerHTML = devs.length ? '' :
+    '<div class="note">Tidak ada device yang cocok dengan filter ini.</div>';
+}
+
+function jump(i){document.getElementById('dev-'+i)?.scrollIntoView({behavior:'smooth'})}
+
+document.getElementById('q').addEventListener('input',e=>{Q=e.target.value;render()});
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active'); FILTER=t.dataset.f; render();
+}));
+
+async function load(){
+  try{
+    const r=await fetch('devices.json?t='+Date.now());
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    DATA=await r.json(); render();
+  }catch(e){
+    document.getElementById('grid').innerHTML='';
+    document.getElementById('empty').innerHTML =
+      `<div class="note err">Gagal memuat devices.json (${e.message}). `+
+      `Pastikan workflow sudah pernah berhasil jalan dan file docs/devices.json ada di repo.</div>`;
+  }
+}
+load();
+setInterval(load, 5*60*1000); // refresh tiap 5 menit
+</script>
+</body>
+</html>
